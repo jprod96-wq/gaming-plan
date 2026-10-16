@@ -68,6 +68,7 @@
   .tile .label { color: var(--text-secondary); font-size: 13px; }
   .tile .value { font-size: 30px; font-weight: 700; margin-top: 2px; }
   .tile .hint { color: var(--text-muted); font-size: 12px; }
+  .tile .short { display: none; }
 
   /* ---- Slot cards (launcher style) ---- */
   .dots { display: none; }
@@ -77,7 +78,7 @@
     overflow: hidden; display: flex; flex-direction: column;
   }
   .hero {
-    position: relative; height: 210px; overflow: hidden;
+    position: relative; height: 216px; overflow: hidden; padding-top: 44px;
     display: flex; align-items: center; justify-content: center;
     background: linear-gradient(160deg, color-mix(in srgb, var(--c) 45%, var(--surface)), var(--surface));
   }
@@ -90,7 +91,7 @@
     background: linear-gradient(to bottom, transparent 45%, var(--surface));
   }
   .hero-cover {
-    position: relative; z-index: 1; height: 172px; aspect-ratio: 3 / 4; object-fit: cover;
+    position: relative; z-index: 1; height: 160px; aspect-ratio: 3 / 4; object-fit: cover;
     border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.55);
   }
   .slot-badge, .moment-badge {
@@ -184,6 +185,7 @@
   }
   .field-label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
   .msg { display: flex; flex-direction: column; gap: 10px; }
+  #inbox { min-height: 130px; }
   .msg-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--text-muted); font-size: 13px; }
   .backup { margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; color: var(--text-muted); font-size: 13px; }
 
@@ -219,7 +221,8 @@
     .tile { padding: 8px 6px; text-align: center; border-radius: 12px; }
     .tile .label { font-size: 10px; line-height: 1.2; }
     .tile .value { font-size: 20px; }
-    .tile .hint { display: none; }
+    .tile .hint, .tile .long { display: none; }
+    .tile .short { display: inline; }
 
     /* Swipeable slot carousel with a peek of the next card */
     .dots { display: flex; justify-content: center; gap: 8px; margin: 14px 0 0; }
@@ -231,9 +234,10 @@
       gap: 12px; margin: 12px -16px 0; padding: 0 16px 4px; scrollbar-width: none;
     }
     .slots::-webkit-scrollbar { display: none; }
-    .card { flex: 0 0 88%; scroll-snap-align: center; }
-    .hero { height: 230px; }
-    .hero-cover { height: 190px; }
+    .card { flex: 0 0 88%; scroll-snap-align: center; align-self: flex-start; }
+    .card-foot { margin-top: 0; }
+    .hero { height: 244px; }
+    .hero-cover { height: 186px; }
     .next { flex-direction: column; align-items: stretch; gap: 8px; }
     .done-btn { width: 100%; font-size: 17px; min-height: 54px; }
 
@@ -439,14 +443,14 @@ function renderStats() {
   const week = state.log.filter(e => e.t >= weekAgo).length;
   const totalHours = all.filter(g => !isOver(g)).reduce((n, g) => n + g.hours * (1 - doneCount(g) / g.steps.length), 0);
   document.getElementById("stats").innerHTML = [
-    tile("Games finished", finished, "every one is a win"),
-    tile("Chapters cleared", chapters, "across all games"),
+    tile("Games finished", finished, "every one is a win", "Finished"),
+    tile("Chapters cleared", chapters, "across all games", "Chapters"),
     tile("This week", week, week ? "keep the streak going" : "one chapter starts it"),
     tile("Hours left", "~" + Math.round(totalHours), "main story estimates"),
   ].join("");
 }
-const tile = (label, value, hint) =>
-  `<div class="tile"><div class="label">${label}</div><div class="value">${value}</div><div class="hint">${hint}</div></div>`;
+const tile = (label, value, hint, short = label) =>
+  `<div class="tile"><div class="label"><span class="long">${label}</span><span class="short">${short}</span></div><div class="value">${value}</div><div class="hint">${hint}</div></div>`;
 
 function renderSlots() {
   document.getElementById("slots").innerHTML = SLOTS.map(slot => {
@@ -523,7 +527,9 @@ function renderShelf() {
         <div class="rate">${RATINGS.map(([r, label]) =>
           `<button class="${g.rating === r ? "on" : ""}" data-act="rate" data-g="${g.id}" data-r="${r}">${label}</button>`).join("")}</div>
         <button class="link-btn" data-act="undo" data-g="${g.id}">undo</button></div></div>`).join("")
-    : `<div class="empty">Your first finished game will land here.</div>`;
+    : `<div class="box" style="text-align:center;padding:28px 18px"><div style="font-size:44px">🏆</div>
+        <div style="font-weight:600;margin-top:6px">Your trophy shelf is waiting</div>
+        <div class="empty" style="margin-top:4px">Finish or drop a game and it lands here. Then rate it, so Claude can pick what's next.</div></div>`;
 }
 
 // Every game with a companion page, active games first

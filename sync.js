@@ -125,7 +125,7 @@
       background: transparent; color: var(--text-primary); padding: 5px 12px; margin-right: 6px; }
     .gps-panel code { font-size: 12px; word-break: break-all; }
     @media (max-width: 760px) { /* phones: top-right, clear of the tracker's bottom nav */
-      .gps-btn { left: auto; right: 12px; bottom: auto; top: calc(12px + env(safe-area-inset-top)); }
+      .gps-btn { left: auto; right: 12px; bottom: auto; top: calc(12px + env(safe-area-inset-top)); padding: 6px 11px; }
       .gps-panel { left: auto; right: 12px; bottom: auto; top: calc(56px + env(safe-area-inset-top)); }
     }`;
   const style = document.createElement("style"); style.textContent = css; document.head.appendChild(style);
@@ -137,7 +137,8 @@
   function setStatus(s) {
     status = s;
     const at = +localStorage.getItem(K.synced);
-    btn.textContent = { off: "☁ Sync off", syncing: "☁ Syncing…", error: "⚠ Sync error",
+    const phone = matchMedia("(max-width: 760px)").matches;
+    btn.textContent = phone ? { off: "☁ Off", syncing: "☁ …", error: "⚠ Sync", ok: "☁ ✓" }[s] : { off: "☁ Sync off", syncing: "☁ Syncing…", error: "⚠ Sync error",
       ok: "☁ Synced" + (at ? " " + new Date(at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "") }[s];
     if (!panel.hidden) renderPanel();
   }
@@ -152,6 +153,7 @@
     } else {
       panel.innerHTML = `<h3>☁ Sync is on</h3>
         <p>${status === "error" ? "⚠ Last sync failed: " + lastError + ". Check your connection or token." : "Progress is shared between your devices."}</p>
+        <p>Last synced: ${localStorage.getItem(K.synced) ? new Date(+localStorage.getItem(K.synced)).toLocaleString() : "not yet"}</p>
         <p>Sync ID (for Claude): <code>${localStorage.getItem(K.gist) || "…"}</code></p>
         <button id="gps-now">Sync now</button><button id="gps-off">Disconnect</button>`;
       panel.querySelector("#gps-now").onclick = pull;
