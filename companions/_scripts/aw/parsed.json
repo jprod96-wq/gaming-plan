@@ -1,0 +1,2534 @@
+{
+ "pages": [
+  {
+   "#": "1",
+   "Image": "",
+   "Name": "The Title Page of the Manuscript",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Found by Alan Wake after it is left behind by Thomas Zane.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Name": "Wake Attacked by a Shadowy Murderer",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Found by Alan Wake after it is left behind by Thomas Zane.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Name": "Wake Fights a Taken with Light",
+   "Section": "Waking up to a Nightmare",
+   "Location": "On the first of the Biltmore Logging Camps, lying on the ground near a pile of processed logs.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Name": "The Dark Presence Wakes Up",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Lying on one of the flat boulders that form a natural bridge over the creek, before the second logging camp.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Name": "Wake Attacked by Birds",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Inside a small logging hut, near the generator in the second logging camp.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Name": "Wake Finds Pages",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Lying on the ground at the top of the hill, after a Safe Haven, on the far side of the second logging camp.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Name": "TV in the Gas Station",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Near a group of green barrels in the forest between the second and third logging camps.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Name": "Wake Lies to the Sheriff",
+   "Section": "Waking up to a Nightmare",
+   "Location": "In front of the main gate of the third logging camp.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Name": "Stucky Taken",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Under the parade float outside Stucky's Gas Station.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Name": "Rose Daydreams About Wake",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Pinned on the wall of an old shed located near the bulldozer outside the first logging camp.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Name": "Barry's Arrival",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Over a silver metal cabinet on the edge of the waterfall rapids, before the second logging camp.",
+   "Difficulty": "All",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "12",
+   "Image": "",
+   "Name": "Toby the Dog",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Pinned to the left of the women's restroom door, behind Stucky's Gas Station.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "13",
+   "Image": "",
+   "Name": "Rose is a Fan",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Lying on a fallen tree outside the first logging camp.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "14",
+   "Image": "",
+   "Name": "The Sudden Stop 1",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "In Alan's office, in his New York apartment.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "15",
+   "Image": "",
+   "Name": "The Sudden Stop 2",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "In Alan's office, in his New York apartment.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "16",
+   "Image": "",
+   "Name": "The Dark Presence in the Diner",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "On the third cell of the Bright Falls Sheriff Station.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "17",
+   "Image": "",
+   "Name": "Wake at Lovers' Peak",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "Lying on a rock in the empty lot behind the Bright Falls Sheriff Station.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "18",
+   "Image": "",
+   "Name": "Alice Sees a Shadow",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "On the floor in the break room of the sheriff station.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "19",
+   "Image": "",
+   "Name": "Barry Doubts Wake's Sanity",
+   "Section": "Elderwood National Park",
+   "Location": "On the ground between Barry's orange SUV and an old shed, outside the hilltop cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "20",
+   "Image": "",
+   "Name": "Rusty Dying",
+   "Section": "Elderwood National Park",
+   "Location": "On the trunk space interior of a parked off-roader, halfway down the road from the hilltop cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "21",
+   "Image": "",
+   "Name": "Rusty Attacked by the Dark Presence",
+   "Section": "Elderwood National Park",
+   "Location": "On the corner of the low stone wall, by the entrance of steps to the Elderwood National Park Ranger Office.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "22",
+   "Image": "",
+   "Name": "Wake Reaches a Safe Haven of Light",
+   "Section": "Elderwood National Park",
+   "Location": "On the floor in the ranger's office, at the end of the corridor.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "23",
+   "Image": "",
+   "Name": "Rusty's Final Thoughts",
+   "Section": "Elderwood National Park",
+   "Location": "On a log picnic table, near the wooden lookout platform and waterfall.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "24",
+   "Image": "",
+   "Name": "Wake Sees the Torch Symbol",
+   "Section": "Elderwood National Park",
+   "Location": "On the path leading to Lover's Peak, next to a sign.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "25",
+   "Image": "",
+   "Name": "Nightingale's Arrival",
+   "Section": "Elderwood National Park",
+   "Location": "Lying on a boulder on the hiking trail leading to Lovers' Peak, before the cable cart platform.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "26",
+   "Image": "",
+   "Name": "Alice's Fear of the Dark",
+   "Section": "Elderwood National Park",
+   "Location": "On the promontory bellow the Lovers' Peak lookout platform.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "27",
+   "Image": "",
+   "Name": "Wake Hears a Chainsaw",
+   "Section": "Elderwood National Park",
+   "Location": "Inside one of the two abandoned huts on the forest trail, near the crashed plane.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "28",
+   "Image": "",
+   "Name": "Barry in Elderwood",
+   "Section": "Elderwood National Park",
+   "Location": "Inside the old mill, lying on a pile of cloth sacks, after leaping across the old elevator.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "29",
+   "Image": "",
+   "Name": "Nightingale Fires at Wake",
+   "Section": "Elderwood National Park",
+   "Location": "Between a trash can and the women's restroom entrance in the Elderwood National Park campground.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "30",
+   "Image": "",
+   "Name": "Wake at the Dark Presence's Mercy*",
+   "Section": "Elderwood National Park",
+   "Location": "On the trail leading back to the hilltop cabin, after the phone call from Ben Mott.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "31",
+   "Image": "",
+   "Name": "Rose and Rusty",
+   "Section": "Elderwood National Park",
+   "Location": "On the wooden floor of the lookout point, halfway down the trail from Rusty's hilltop cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "32",
+   "Image": "",
+   "Name": "Barry Meets Rose",
+   "Section": "Elderwood National Park",
+   "Location": "On the ground of the picnic area, after deviating from the trail leading to Lovers' Peak to the right after crossing the bridge, near the waterfall vista.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "33",
+   "Image": "",
+   "Name": "Sarah Thinks About Wake",
+   "Section": "Elderwood National Park",
+   "Location": "Behind a log on the edge of the precipice overlooking the old mill, after traversing the path filled with bear traps.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "34",
+   "Image": "",
+   "Name": "Deputies at the Logging Site",
+   "Section": "Elderwood National Park",
+   "Location": "On a cloth sack on the small balcony of the old mill.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "35",
+   "Image": "",
+   "Name": "Wake Feels the Dark Presence",
+   "Section": "Elderwood National Park",
+   "Location": "On a chest behind a group of large crates inside the derelict storage barn above the old mill.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "36",
+   "Image": "",
+   "Name": "Wake's Despair",
+   "Section": "Elderwood National Park",
+   "Location": "Inside the blocked tunnel located near the entrance of the Elderwood National Park.",
+   "Difficulty": "All",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "37",
+   "Image": "",
+   "Name": "Randolph Calls the Police",
+   "Section": "On the Run",
+   "Location": "After exiting Rose's trailer, on the ground next to her mailbox.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "38",
+   "Image": "",
+   "Name": "The Dark Presence Sleeps",
+   "Section": "On the Run",
+   "Location": "On a log in the middle of the forest, after escaping from the police.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "39",
+   "Image": "",
+   "Name": "Nightingale in the Radio Station",
+   "Section": "On the Run",
+   "Location": "Pinned to a fence shortly after escaping from the KBF-FM Radio Station.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "40",
+   "Image": "",
+   "Name": "Sarah Distrusts Nightingale",
+   "Section": "On the Run",
+   "Location": "On a small rock at the right of the path, before the safe haven located in front of the railroad tracks.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "41",
+   "Image": "",
+   "Name": "Wake Attacked by a Possessed Object",
+   "Section": "On the Run",
+   "Location": "On a tree stump, after receiving a call from Alice.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "42",
+   "Image": "",
+   "Name": "Wake and the Dark Presence in the Lodge",
+   "Section": "On the Run",
+   "Location": "Lying on a pile of girders next to the ladder leading to the water tower foundation, after the railway bridge.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "43",
+   "Image": "",
+   "Name": "Wake Attacked by the Dark Presence",
+   "Section": "On the Run",
+   "Location": "At the top of the train depot warehouse stairs leading to the yard.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "44",
+   "Image": "",
+   "Name": "Rose Visited by the Dark Presence",
+   "Section": "On the Run",
+   "Location": "Down the road, near the fallen trees, after a police car is thrown by the Dark Presence.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "45",
+   "Image": "",
+   "Name": "Rose Touched by the Dark Presence",
+   "Section": "On the Run",
+   "Location": "On the edge of a cliff above the small river gorge, after passing the old wooden bridge located near a safe haven.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "46",
+   "Image": "",
+   "Name": "Walter Fights Danny",
+   "Section": "On the Run",
+   "Location": "On the concrete pad of the radio mast, located at the top of the mountain above the Radio Station.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "47",
+   "Image": "",
+   "Name": "Wake Attacked by a Bulldozer",
+   "Section": "On the Run",
+   "Location": "Pinned to a perimeter gate found at the end of the trail, away from the derelict cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "48",
+   "Image": "",
+   "Name": "Wake and Night Springs",
+   "Section": "On the Run",
+   "Location": "On a tree stump facing the cliff, at the right of the path leading to the water tower.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "49",
+   "Image": "",
+   "Name": "Sarah in the Radio Station",
+   "Section": "Mirror Peak",
+   "Location": "Lying on the ground outside the main building of the Bright Falls Coal Mine Museum.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "50",
+   "Image": "",
+   "Name": "Thomas Zane in Love with Barbara Jagger",
+   "Section": "Mirror Peak",
+   "Location": "On the ground near the train yard carriages, outside the main building of the Coal Mine Museum.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "51",
+   "Image": "",
+   "Name": "Wake Touched by the Dark Presence",
+   "Section": "Mirror Peak",
+   "Location": "On the top floor of the main building of the depot, on the way to Mirror Peak.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "52",
+   "Image": "",
+   "Name": "Wake and Barry in the Cell",
+   "Section": "Mirror Peak",
+   "Location": "On the ground in the middle of the forest on the path to the mine tunnel.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "53",
+   "Image": "",
+   "Name": "Wake and Casey",
+   "Section": "Mirror Peak",
+   "Location": "On the wooden bridge leading into the Gray Peak Gorge Ghost Town.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "54",
+   "Image": "",
+   "Name": "Nightingale in the Majestic",
+   "Section": "Mirror Peak",
+   "Location": "On the junction chamber of the old silver mine.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "55",
+   "Image": "",
+   "Name": "Mott at Cauldron Lake",
+   "Section": "Mirror Peak",
+   "Location": "On a narrow cliff path next to the broken wooden bridge, before reaching the Mountain Manor.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "56",
+   "Image": "",
+   "Name": "Wake Wakes Up in the Lodge",
+   "Section": "Mirror Peak",
+   "Location": "On the wooden deck stairs, on the path leading to the Mirror Peak lookout, after the Mountain Manor.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "57",
+   "Image": "",
+   "Name": "Mott on the Ferry",
+   "Section": "Mirror Peak",
+   "Location": "At the top of the mine tower structure, located before the mine entrance, after the ranger station.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "58",
+   "Image": "",
+   "Name": "Hunters Taken",
+   "Section": "Mirror Peak",
+   "Location": "At the bottom of the cave tunnel of the old silver mine, near the waterlogged mine shaft where Alan experiences vision of Alice being taken away by the Dark Presence.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "59",
+   "Image": "",
+   "Name": "Doc Examines Barry and Rose",
+   "Section": "Mirror Peak",
+   "Location": "In a small red shack on the left side of the track, in the Gray Peak Gorge Ghost Town.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "60",
+   "Image": "",
+   "Name": "Wake Reads a Page",
+   "Section": "Mirror Peak",
+   "Location": "On the rocks near the Gray Peak Gorge Ghost Town.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "61",
+   "Image": "",
+   "Name": "Tor Hits Nurse Sinclair",
+   "Section": "Mirror Peak",
+   "Location": "At the top of the cube-shaped platform found after exiting the Old Silver Mine.",
+   "Difficulty": "All",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "62",
+   "Image": "",
+   "Name": "Thomas Zane's Writing and Assistant",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "Odin Anderson hands this page to Alan during their conversation in the Cauldron Lake Lodge.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "63",
+   "Image": "",
+   "Name": "Barry in the Lodge",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "Next to the stairs of the mezzanine level of the lodge, during the commotion caused by Anderson Brothers.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "64",
+   "Image": "",
+   "Name": "Hartman Watches Wake Fall",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "Alan finds this page in Doctor Hartman's office.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "65",
+   "Image": "",
+   "Name": "Hartman's Mission",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the small withdrawing room of the lodge.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "66",
+   "Image": "",
+   "Name": "Wake Sees the Old Gods Stage",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "At the base of the tree in the small patio area of the lodge's hedge maze.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "67",
+   "Image": "",
+   "Name": "Barry Attacked by a Taken",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the stone walkway, after passing under the pergola bridge of the lodge's walled garden.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "68",
+   "Image": "",
+   "Name": "Mott in Charge",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "Inside the shed located in front of the walled garden.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "69",
+   "Image": "",
+   "Name": "Mott Fails Hartman",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "In Hartman's interview room.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "70",
+   "Image": "",
+   "Name": "Hartman and the Power Failure",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On a bench located in a dead of the hedge maze.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "71",
+   "Image": "",
+   "Name": "Hartman Sedates Wake",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the pergola bridge overlook, in the walled garden.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "72",
+   "Image": "",
+   "Name": "Nightingale Arrests Wake",
+   "Section": "The Anderson Farm",
+   "Location": "On a wooden platform, next to a generator, before the possessed gates of the mine yard.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "73",
+   "Image": "",
+   "Name": "The Patients Escape the Lodge",
+   "Section": "The Anderson Farm",
+   "Location": "Outside a ruined house located before Walter Snyder's cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "74",
+   "Image": "",
+   "Name": "The Dark Presence at Large",
+   "Section": "The Anderson Farm",
+   "Location": "Left by Thomas Zane on the path leading to Walter Snyder's cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "75",
+   "Image": "",
+   "Name": "The Anderson Brothers in the 70s",
+   "Section": "The Anderson Farm",
+   "Location": "Pinned on a stone on the second floor of the Anderson barn.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "76",
+   "Image": "",
+   "Name": "The Mystery of the Missing Week",
+   "Section": "The Anderson Farm",
+   "Location": "On the second floor landing of the Anderson's farmhouse.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "77",
+   "Image": "",
+   "Name": "Walter at the Anderson Farm",
+   "Section": "The Anderson Farm",
+   "Location": "At the end of the dead-end tunnel, inside the hillside by the overgrown mine yard.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "78",
+   "Image": "",
+   "Name": "Hartman During the Missing Week",
+   "Section": "The Anderson Farm",
+   "Location": "Pinned to an outhouse located near a small barn and windmill in the Anderson Farm.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "79",
+   "Image": "",
+   "Name": "Hartman Considers Mott and Wake",
+   "Section": "The Anderson Farm",
+   "Location": "On the porch of Walter Snyder’s cabin.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "80",
+   "Image": "",
+   "Name": "Mulligan Questions Nightingale's Orders",
+   "Section": "The Anderson Farm",
+   "Location": "On one of the electrical breakers, on the right side of the Old Gods of Asgard stage.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "81",
+   "Image": "",
+   "Name": "Nightingale Finds the Manuscript",
+   "Section": "The Anderson Farm",
+   "Location": "On a wagon cart, in the far corner of the side field of the Anderson Farm located next to the barn.",
+   "Difficulty": "All",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "82",
+   "Image": "",
+   "Name": "Nightingale Reads the Manuscript",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the cell corridor of the Bright Falls Sheriff Station, after the Nightingale is taken away by the Dark Presence,",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "83",
+   "Image": "",
+   "Name": "Nightingale Attacked by the Dark Presence",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the cell corridor of the Bright Falls Sheriff Station, after the Nightingale is taken away by the Dark Presence,",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "84",
+   "Image": "",
+   "Name": "The Dark Presence Set Back",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the debriefing room of the Bright Falls Town Hall.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "85",
+   "Image": "",
+   "Name": "Cynthia's Work",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the counter of the Bright Falls Book Store.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "86",
+   "Image": "",
+   "Name": "The Dark Presence Hunts Wake",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the wooden pulpit of the Bright Falls Church.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "87",
+   "Image": "",
+   "Name": "Alice Trapped in the Dark",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On a picnic bench located on the wooden lookout platform near the top of the hill.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "88",
+   "Image": "",
+   "Name": "Barry in the Sheriff's Station",
+   "Section": "Night Life in Bright Falls",
+   "Location": "Pinned next to the men's restroom door, on the far left end of the dark corridor of the Oh Deer Diner.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "89",
+   "Image": "",
+   "Name": "Barry in the General Store",
+   "Section": "Night Life in Bright Falls",
+   "Location": "Inside a yellow haul truck container located near the church.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "90",
+   "Image": "",
+   "Name": "Wake's Plan",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a red armchair located on top of a metal cargo container, on the transformer yard.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "91",
+   "Image": "",
+   "Name": "The Falling Helicopter",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the ground near the exit of the water pipe leading to the Bright Falls Dam.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "92",
+   "Image": "",
+   "Name": "Zane's Shoebox",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a rock, after the broken fence blocked by three possessed spools, near the entrance to the dam.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "93",
+   "Image": "",
+   "Name": "Cynthia on Her Way to the Dam",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the transformer yard of the Bright Falls Light & Power, next to a pair of electrified cables.",
+   "Difficulty": "All",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "94",
+   "Image": "",
+   "Name": "The Poet and the Muse Lyrics 4",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a rock, behind a fence near the security hut of the power plant.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "95",
+   "Image": "",
+   "Name": "Children of the Elder God Lyrics 1",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the road next to a yellow school bus, near the L.t. William T.G. Randall Memorial Bridge.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "96",
+   "Image": "",
+   "Name": "Children of the Elder God Lyrics 2",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the fallen tree that spans the gorge fissure between the water pipe and the site of the crashed helicopter.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "97",
+   "Image": "",
+   "Name": "The Dark Presence Wants to Stop Wake",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the highway road, after exiting the tunnel, when the day turns to night.",
+   "Difficulty": "All",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "98",
+   "Image": "",
+   "Name": "The Trail of the Dark Presence",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "At the far end of the tunnel before Larsen's Auto Salvage, next to a safe haven.",
+   "Difficulty": "All",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "99",
+   "Image": "",
+   "Name": "Thomas Zane's Last Dive",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a stove in the scrapyard, below the small control tower.",
+   "Difficulty": "All",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "100",
+   "Image": "",
+   "Name": "The Dark Place",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "Inside the dilapidated chapel of the Southeast Cliffs Ghost Town.",
+   "Difficulty": "All",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "101",
+   "Image": "",
+   "Name": "The Way through the Dark Place",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the wooden elevator platform above the mine encampment before the fissure.",
+   "Difficulty": "All",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "102",
+   "Image": "",
+   "Name": "The Poet and the Muse Lyrics 1",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the green couch of the Majestic Motel reception room.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "103",
+   "Image": "",
+   "Name": "The Poet and the Muse Lyrics 2",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a shelf in the garage barn's upper floor, after the confrontation with the possessed monster truck.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "104",
+   "Image": "",
+   "Name": "The Poet and the Muse Lyrics 3",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a table in the upper office of the scrapyard garage.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "105",
+   "Image": "",
+   "Name": "Sarah and Barry in the Well-Lit Room",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "At the entrance of the blocked highway tunnel, below the scrapyard.",
+   "Difficulty": "All",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "106",
+   "Image": "",
+   "Name": "Zane's Poem",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "Pinned to the mesh fence surrounding the old generator of the mine encampment.",
+   "Difficulty": "Nightmare",
+   "_episode": "Episode 6: Departure"
+  }
+ ],
+ "thermos": [
+  {
+   "#": "1",
+   "Image": "",
+   "Section": "A Writer's Dream",
+   "Location": "Inside the ruined covered bridge.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Section": "A Writer's Dream",
+   "Location": "Inside the small military bunker of Rain Cove Point.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Section": "A Writer's Dream",
+   "Location": "On a log bench on the Rain Cove Point Lighthouse.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Section": "Welcome to Bright Falls",
+   "Location": "On a kitchen trolley in the Oh Deer Diner, under the neon sign with the name of the restaurant.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Section": "Welcome to Bright Falls",
+   "Location": "In the vista view overlooking Cauldron Lake.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Section": "Welcome to Bright Falls",
+   "Location": "In the kitchen of the Bird Leg Cabin.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "By the pickup truck, in the log maze of the first Biltmore logging camp.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "On a small boulder in the small island in the middle of the river.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "On a small boulder in the second logging camp, behind a large pile of logs.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Over the ridge overlooking Stucky's Gas Station, after the second logging camp.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Behind the rocks on the promontory, near the generator-powered safe haven, between the second and third logging camps.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "12",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "On the caterpillar tracks of the yellow crane in the third logging camp.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "13",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Next to Stucky's Gas Station prices signs.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "14",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Next to the green truck blocking the entrance to the tunnel.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "15",
+   "Image": "",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "In Alice's office in the Wake's apartment.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "16",
+   "Image": "",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "In the radio room of the Sheriff Station.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "17",
+   "Image": "",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "On the loading dock behind the Sheriff Station parking lot.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "18",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On the kitchen counter of the Elderwood Visitor Center.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "19",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On the kitchen of the hilltop cabin.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "20",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On the steps of the hilltop cabin hot-tub",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "21",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "Inside the storage shed near the visitor center and the ranger office.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "22",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "At the foot of a tree behind the ranger office.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "23",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a rock shelf overlooking the Tree Ring, behind a destroyed fence and phone booth.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "24",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a picnic table near the Tree Ring.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "25",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "Behind the information sign of the Lovers' Peak lookout.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "26",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "Inside one of the two trapper huts found near the crashed plane.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "27",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On the narrow rocky promontory overlooking the old water mill.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "28",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a small table on the middle floor of the water mill.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "29",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a picnic table in the campground.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "30",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "To the right of the campground, next to the folded truck blocking the road.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "31",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a picnic table next to the entrance to the Elderwood National Park.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "32",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "On the picnic table near the fallen yacht, in the Sparkling River Estates trailer park.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "33",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "In the kitchen of Rose Marigold's trailer.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "34",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "Inside the first ranger station.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "35",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "On a boulder, near the storage shed containing the generator.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "36",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "On the footing of the KBF-FM Radio Station sign.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "37",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "On the cliff edge above the the radio station, before the radio mast at the top of the mountain.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "38",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "Inside a small shed near the derelict barn with the fallen tree on it.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "39",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "On top of the pallets in the Train Depot storage yard.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "40",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "At the right of the train depot exit, before reaching the Bright Falls Light & Power Pickup.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "41",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "On the wingback chair, on the cliff vista, near the destroyed bridge.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "42",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Next to the blocked mine entrance of the Bright Falls Coal Mine Museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "43",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "On a shelf in the storage warehouse of the coal mine museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "44",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "On a wingback chair in the top floor of the second warehouse of the coal mine museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "45",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "At the end of the partially destroyed bridge.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "46",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Inside the red cabin near the sinkhole.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "47",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Inside a derelict red barn located next to a rail carriage, in the Gray Peak Gorge Ghost Town.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "48",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Behind the old shed where the keys are found.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "49",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "In a narrow passage of the Old Silver Mine, before the elevator.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "50",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "On the rocky cliff, to the left after the rope bridge.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "51",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Behind the garden gate of Mountain Manor.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "52",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the reception desk of the Cauldron Lake Lodge.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "53",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the railing of the lodge mezzanine balcony.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "54",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the windowsill of the storeroom next to Emil Hartman's office.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "55",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the stone walkway by the main entrance, outside the lodge.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "56",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "Inside the gazebo where the taken Birch is fought.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "57",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On a stone wall near the exit of the lodge garden.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "58",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On a small crate on the wooden platform of the mine yard.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "59",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "At the abandoned campground.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "60",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "In the window frame of the ruined house, before Walter Snyder's cabin.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "61",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On the kitchen of Walter Snyder's cabin.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "62",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "Next to a rusting tractor on the road to the Anderson Farm",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "63",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "Next to a rusting tractor by the road junction.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "64",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On the control panel of the Old Gods of Asgard stage.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "65",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On one of the bleachers, in front of the stage.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "66",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On a table inside the barn, near the rusted car.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "67",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On a shelf on the second floor of the silo barn.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "68",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On a chair in the downstairs bathroom of the Anderson's farmhouse.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "69",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "In the kitchen of the Anderson's farmhouse.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "70",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the reception desk of the Bright Falls Sheriff Station.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "71",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the information kiosk in Harbor Street.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "72",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the floor in the Oh Deer Diner main counter area.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "73",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "Next to a portable toilet at the end of Harbor Street.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "74",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On a wooden table in one of the tents behind the Bright Falls Town Hall.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "75",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "In the small kitchen next to mayor's office, in the Town Hall.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "76",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "In the display window of the Bright Falls Book Store.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "77",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "In the sandbox of the Bright Falls Park.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "78",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "In a corner in the crypt of the Bright Falls Church.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "79",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On a wooden bench, near the helipad.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "80",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a concrete barrier outside the warehouse.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "81",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a concrete pipe near the exit of the warehouse.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "82",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Next to a mesh fence in the transformer yard.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "83",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "In the grass, outside the first control booth of the L.t. William T.G. Randal Memorial Bridge.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "84",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a sofa in the second control booth of the spinning bridge.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "85",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Next to the security hut of the Bright Falls Light & Power.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "86",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Next to a low bookcase in Cynthia Weaver's room.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "87",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Inside a giant concrete tube near the Bright Falls Dam elevator.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "88",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the edge of the cliff, right of the dam elevator exit.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "89",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On a shelf, at the bottom of the spiral stairs, inside the dam fortification.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "90",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a picnic table at the scenic vista area.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "91",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "In front of a barn in the pasture, before the first tunnel.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "92",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "In the restroom of the Majestic Motel.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "93",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the porch of a small cottage in the field, after encountering the possessed monster truck.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "94",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a metal shelving in the Larsen's Auto Salvage garage.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "95",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a stack of pallets near the ramp, in the scrapyard.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "96",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a shelf inside the Holloway and Company building in the Southeast Cliffs Ghost Town.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "97",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On a covered platform on the far side of the mine cart bridge.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "98",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "Inside the fallen rail carriage in the woods.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "99",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "At the base of the windmill, on the mine encampment.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "100",
+   "Image": "",
+   "Section": "The Dark Place",
+   "Location": "It has to be materialized by shining the flashlight on the \"thermos\" word next to the sofa, in the Dark Place.",
+   "_episode": "Episode 6: Departure"
+  }
+ ],
+ "clocks": [
+  {
+   "#": "1",
+   "Image": "",
+   "Location": "In the kitchen of the Oh Deer Diner. It can only be reached after a Taken knocks down the door.",
+   "_episode": null
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Location": "On a bench behind the fallen trees near the playground entrance.",
+   "_episode": null
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Location": "On a blue armchair found in the corner between the broken wooden stairs and the exit ladder in the church basement.",
+   "_episode": null
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Location": "On a red broken train cart found next to a railway track, after the first encounter with the invisible Taken.",
+   "_episode": null
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Location": "In a red and white circus tent with the \"Boom!\" words inside, near the end of the railway track, not far from the previous alarm clock.",
+   "_episode": null
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Location": "In a corner behind an open fence on the far left side of the streetlights area, next to the cliff edge.",
+   "_episode": null
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Location": "Hanging on the side of the wooden log stack on the far right side of the Sawmill yard, next to a \"Wheels\" word.",
+   "_episode": null
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Location": "On the edge of the wooden platform of the Sawmill dock.",
+   "_episode": null
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Location": "Next to a fence, to the left of the wooden warehouse.",
+   "_episode": null
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Location": "On an armchair in Alan's study.",
+   "_episode": null
+  }
+ ],
+ "tv": [
+  {
+   "#": "1",
+   "Image": "",
+   "Name": "Quantum Suicide",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Inside the small shed outside the third Biltmore logging camp.",
+   "_episode": "Episode One: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Name": "Writer in the Cabin 1",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Inside the Stucky's Gas Station garage.",
+   "_episode": "Episode One: Nightmare"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Name": "Writer in the Cabin 2",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "In the Bright Falls Sheriff Station cell area, after talking with Ben Mott.",
+   "_episode": "Episode Two: Taken"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Name": "Man in the Mirror",
+   "Section": "Elderwood National Park",
+   "Location": "Inside the third hilltop cabin before the Elderwood Visitor Center.",
+   "_episode": "Episode Two: Taken"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Name": "Writer in the Cabin 3",
+   "Section": "Elderwood National Park",
+   "Location": "In the men's restroom of the Elderwood National Park campground.",
+   "_episode": "Episode Two: Taken"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Name": "Writer in the Cabin 4",
+   "Section": "On the Run",
+   "Location": "In Rose Marigold's bedroom, on her trailer.",
+   "_episode": "Episode Three: Ransom"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Name": "A Family Occasion",
+   "Section": "Mirror Peak",
+   "Location": "Inside the train depot warehouse.",
+   "_episode": "Episode Three: Ransom"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Name": "Writer in the Cabin 5",
+   "Section": "Mirror Peak",
+   "Location": "Inside a shack in the Gray Peak Gorge Ghost Town.",
+   "_episode": "Episode Three: Ransom"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Name": "Writer in the Cabin 6",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the mezzanine floor of the Cauldron Lake Lodge.",
+   "_episode": "Episode Four: The Truth"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Name": "Writer in the Cabin 7",
+   "Section": "The Anderson Farm",
+   "Location": "In a room on the second floor of Walter Snyder's cabin.",
+   "_episode": "Episode Four: The Truth"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Name": "The Dream of Dreams",
+   "Section": "The Anderson Farm",
+   "Location": "Inside the large barn on the Anderson Farm.",
+   "_episode": "Episode Four: The Truth"
+  },
+  {
+   "#": "12",
+   "Image": "",
+   "Name": "Taken in His Prime",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the second floor of the Town Hall building.",
+   "_episode": "Episode Five: The Clicker"
+  },
+  {
+   "#": "13",
+   "Image": "",
+   "Name": "An Absence of Creativity",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Inside the second control booth of the L.t. William T.G. Randall Memorial Bridge.",
+   "_episode": "Episode Five: The Clicker"
+  },
+  {
+   "#": "14",
+   "Image": "",
+   "Name": "The Harry Garrett Show",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "In the living room of Alan Wake's apartment.",
+   "_episode": "Episode Six: Departure"
+  }
+ ],
+ "radio": [
+  {
+   "#": "1",
+   "Image": "",
+   "Name": "A Famous Deerfest Guest",
+   "Section": "Welcome to Bright Falls",
+   "Location": "On the back porch of the Bird Leg Cabin, on Diver's Isle.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Name": "Have You Seen This Dog?",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Inside a hut, on the far side of the second Biltmore logging camp.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Name": "Deerfest Floats Are Very Exciting",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "On the back of the Wahlberg warehouse loading dock, behind the Bright Falls Sheriff Station.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Name": "Doc Nelson's Deerfest Plans",
+   "Section": "Elderwood National Park",
+   "Location": "On the first cabin from the hilltop summit on the path leading the Elderwood Visitor Center.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Name": "Snyder's Feeling the Pressure",
+   "Section": "On the Run",
+   "Location": "On the back porch of a trailer located near Rose Marigold's trailer.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Name": "Peabody Heard Gunfire",
+   "Section": "On the Run",
+   "Location": "On a safe haven located near a small bridge.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Name": "Lorna Miles, Humanitarian",
+   "Section": "On the Run",
+   "Location": "Automatically obtained when reaching the KBF-FM Radio Station.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Name": "Maine's Anger",
+   "Section": "Mirror Peak",
+   "Location": "On a small abandoned shack located next to the broken bridge on the road leading to the Bright Falls Coal Mine Museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Name": "A Conversation About Love",
+   "Section": "Mirror Peak",
+   "Location": "Inside the ranger station located above the Bright Falls Coal Mine Museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Name": "A Missing Persons Alert",
+   "Section": "The Anderson Farm",
+   "Location": "Inside a ranger station located on the road leading to the Anderson Farm.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Name": "Mulligan and Thornton Bicker",
+   "Section": "The Anderson Farm",
+   "Location": "On the fifth floor of the storage silo on the Anderson Farm.",
+   "_episode": "Episode 4: The Truth"
+  }
+ ],
+ "chests": [
+  {
+   "#": "1",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Behind the storage bay of the first Biltmore logging camp.",
+   "Content": "One flare gun.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Inside the dilapidated shack above the second logging camp.",
+   "Content": "Two packs of lithium batteries.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Inside a dilapidated wooden structure with a rusted pickup truck, found behind the small shed with a safe haven, after the second logging camp.",
+   "Content": "One flare gun.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "Uphill from the third logging camp, near the bulldozer, in a half-circle of boulders.",
+   "Content": "One flare gun.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "At the back of the Moonshine Cave.",
+   "Content": "Lithium batteries.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "In the waterfall grotto, below the Lovers' Peak lookout platform.",
+   "Content": "Three flares, batteries.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On the upper rocks, by the wing of the crashed airplane.",
+   "Content": "Two flares.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "In a small shed found in the grassy dell at the right of the road leading back to the Elderwood Visitor Center.",
+   "Content": "Two flares.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "In the back of Rusty's rental cabin.",
+   "Content": "Two rounds of flare gun ammunition.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "Inside a cave found near a destroyed police car, before the KBF-FM Radio Station.",
+   "Content": "Three flares, lithium batteries.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "Inside a dilapidated, small cottage, after receiving a call from \"Alice\".",
+   "Content": "Three flares, batteries.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "12",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Inside a mine tunnel, found after exiting the coal mine complex.",
+   "Content": "Three flashbang grenades.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "13",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "On the vista above the Gray Peak Gorge Ghost Town.",
+   "Content": "One flare gun, one round of flare gun ammunition.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "14",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "Behind a boulder, after passing the old rope bridge.",
+   "Content": "One flare gun, one round of flare gun ammunition.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "15",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "At the end of the precipice path hidden behind the trees of the Lodge's pergola garden.",
+   "Content": "One flare gun, one round of flare gun ammunition.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "16",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On the root cellar underneath Walter Snyder's house.",
+   "Content": "One flare, one flashbang grenade.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "17",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "Inside the empty cabin found near the ranger station.",
+   "Content": "Two flashbang grenades.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "18",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "Inside the small barn near the mill, on the Anderson Farm.",
+   "Content": "One flashbang grenade, revolver ammunition.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "19",
+   "Images": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the broken pier on the far end of Harbor Street.",
+   "Content": "One flare gun, one round of flare gun ammunition.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "20",
+   "Images": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "At the top of the shoreline cannery stair.",
+   "Content": "One flare gun, lithium batteries.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "21",
+   "Images": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "In the storage room on the upper floor of the Bright Falls Town Hall.",
+   "Content": "One flare gun, one flare.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "22",
+   "Images": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "Inside the shed in the parking lot of the Bright Falls Book Store.",
+   "Content": "One flare gun, one round of flare gun ammunition.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "23",
+   "Images": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Near the entrance to the transformer yard of the power plant, next to the wire spools.",
+   "Content": "One flare, one flashbang grenade.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "24",
+   "Images": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the base of the power plant, near the water's edge.",
+   "Content": "Two rounds of flare gun ammunition, two flashbang grenades.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "25",
+   "Images": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Behind the red shack on the trail to the Bright Falls Dam elevator.",
+   "Content": "A hunting rifle, hunting rifle ammunition.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "26",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "Inside the small hut, at the bottom of the hill, after the logging yard at the left of the highway.",
+   "Content": "One round of flare gun ammunition, one flashbang grenade.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "27",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "In the wall-less barn behind the Larsen's Auto Salvage garage.",
+   "Content": "Three flares, two flashbang grenades.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "28",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "Inside the shack outside the Southeast Cliffs Ghost Town, by the ruined bridge.",
+   "Content": "One flare gun, one flashbang grenade.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "29",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "At the base of the ravine, below the mine cart bridge.",
+   "Content": "Three flares, two flashbang grenades, two rounds of flare gun ammunition.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "30",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "Inside the first building in the old mining encampment.",
+   "Content": "Three flares, two flashbang grenades.",
+   "_episode": "Episode 6: Departure"
+  }
+ ],
+ "cans": [
+  {
+   "#": "1",
+   "Image": "",
+   "Section": "A Writer's Dream",
+   "Location": "On the fence of the clearing where the revolver is first obtained.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Section": "Waking up to a Nightmare",
+   "Location": "On the table of the balcony with the broken staircase, on the second logging camp.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a barrel in the woods found near the water mill vista, after the area filled with bear traps.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Section": "Elderwood National Park",
+   "Location": "On a picnic table found next to an abandoned caravana and a Safe Haven, in the pasture at the left of the road leading back to the Elderwood Visitor Center.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Section": "On the Run",
+   "Location": "On an old, open shack, near the barn with the fallen tree on it.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Section": "Mirror Peak",
+   "Location": "On the cable car platform, after the crashing of the cable car.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the low, perimeter wall of the pergola walkway in the Cauldron Lake Lodge garden, after passing under the bridge.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Section": "The Anderson Farm",
+   "Location": "On a wooden wire wheel found next to the silo of Anderson farm, after exiting the barn.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the roof of a hot dog trailer found near the Auto Supplies store on Harbor street.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Section": "Bright Falls Light & Power",
+   "Location": "On the low, perimeter wall of the Bright Falls Light & Power, near the kill switch.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the low wall in the Majestic Motel parking lot.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "12",
+   "Image": "",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the balcony on the upper office of the Larsen's Auto Salvage garage.",
+   "_episode": "Episode 6: Departure"
+  }
+ ],
+ "signs": [
+  {
+   "#": "1",
+   "Image": "",
+   "Name": "The 68th Annual Deerfest",
+   "Section": "Waking up to a Nightmare",
+   "Location": "On the shop of Stucky's Gas Station.",
+   "_episode": "Episode 1: Nightmare"
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Name": "Have You Seen This Man?",
+   "Section": "Bright Falls Sheriff Station",
+   "Location": "On the wall of the corridor leading to Sheriff Breaker's office, inside the Sheriff Station.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Name": "The skeleton of a Columbian Mammoth (Mammuthus columbi)",
+   "Section": "Elderwood National Park",
+   "Location": "In front of Buck-Toothed Charlie's skeleton, inside the Elderwood Visitor Center.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Name": "Moonshine Cave",
+   "Section": "Elderwood National Park",
+   "Location": "Inside the Moonshine Cave.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Name": "The Great Old One",
+   "Section": "Elderwood National Park",
+   "Location": "Next to the Great Old One.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Name": "Tree Ring",
+   "Section": "Elderwood National Park",
+   "Location": "On a small picnic area near the cable car.",
+   "_episode": "Episode 2: Taken"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Name": "Founding of the Mining Company",
+   "Section": "Mirror Peak",
+   "Location": "On the Bright Falls Coal Mine Museum, next to a closed tunnel.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Name": "Decline of the Mining Company",
+   "Section": "Mirror Peak",
+   "Location": "On the left side of the display cabinet of the coal mine museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Name": "Closure of the Mining Company",
+   "Section": "Mirror Peak",
+   "Location": "On the corner of a wall of the main building of the coal mine museum.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Name": "Gray Peak Gorge",
+   "Section": "Mirror Peak",
+   "Location": "Next to the broken bridge of the Gray Peak Gorge Ghost Town.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Name": "Cauldron Lake",
+   "Section": "Mirror Peak",
+   "Location": "Next to a safe haven located near the rope bridge leading to Mirror Peak.",
+   "_episode": "Episode 3: Ransom"
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Name": "Sundial Inscription",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "At the foot of the sundial stone platform at the Cauldron Lake Lodge.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "11",
+   "Image": "",
+   "Name": "The Creator's Dilemma",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "In the lodge reception area.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "12",
+   "Image": "",
+   "Name": "Tenets of the Lodge",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "On the corridor near the recreation room of the lodge.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "13",
+   "Image": "",
+   "Name": "\"Suspended\"",
+   "Section": "Cauldron Lake Lodge",
+   "Location": "At the base of the \"Suspended\" sculpture in the driveway of the lodge.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "14",
+   "Image": "",
+   "Name": "The 1975 Ragnarock Tour",
+   "Section": "The Anderson Farm",
+   "Location": "On the upper floor of the Anderson Farm barn.",
+   "_episode": "Episode 4: The Truth"
+  },
+  {
+   "#": "15",
+   "Image": "",
+   "Name": "History of Bright Falls",
+   "Section": "Night Life in Bright Falls",
+   "Location": "At the foot of the statue located in the Bright Falls park.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "16",
+   "Image": "",
+   "Name": "Alan Wake book advert",
+   "Section": "Night Life in Bright Falls",
+   "Location": "On the Bright Falls Book Store.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "17",
+   "Image": "",
+   "Name": "Church Events, Fall Schedule",
+   "Section": "Night Life in Bright Falls",
+   "Location": "At the front of the Bright Falls Church.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "18",
+   "Image": "",
+   "Name": "L.t. William T.G. Randall Memorial Bridge",
+   "Section": "Bright Falls Light & Power",
+   "Location": "At the right side of the road before the L.t. William T.G. Randall Memorial Bridge.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "19",
+   "Image": "",
+   "Name": "Warning Sign",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Next to the entrance to the Bright Falls Light & Power.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "20",
+   "Image": "",
+   "Name": "Floodgate Controls",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Next to the switches controlling the dam bridges leading to the kill switch, on the Bright Falls Light & Power.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "21",
+   "Image": "",
+   "Name": "Decommissioned Notice",
+   "Section": "Bright Falls Light & Power",
+   "Location": "Next to the switch at the entrance to the Bright Falls Dam.",
+   "_episode": "Episode 5: The Clicker"
+  },
+  {
+   "#": "22",
+   "Image": "",
+   "Name": "Majestic Motel Advert",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the second vista lookout after the Bright Falls Dam.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "23",
+   "Image": "",
+   "Name": "Majestic Motel Regulations",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the reception room of the Majestic Motel.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "24",
+   "Image": "",
+   "Name": "Scrapyard Warning Sign",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "At the entrance to the Larsen's Auto Salvage, next to the open gate.",
+   "_episode": "Episode 6: Departure"
+  },
+  {
+   "#": "25",
+   "Image": "",
+   "Name": "Scrapyard Visitor Sign",
+   "Section": "On the Road to Cauldron Lake",
+   "Location": "On the wall of the yard manager’s garage entrance, at the Larsen's Auto Salvage.",
+   "_episode": "Episode 6: Departure"
+  }
+ ],
+ "nsgames": [
+  {
+   "#": "1",
+   "Image": "",
+   "Location": "On the hedge maze, lying on an easel on an dead end.",
+   "_episode": null
+  },
+  {
+   "#": "2",
+   "Image": "",
+   "Location": "Next to the fireplace of the Cauldron Lake Lodge.",
+   "_episode": null
+  },
+  {
+   "#": "3",
+   "Image": "",
+   "Location": "On a bin on the patio of the Cauldron Lake Lodge, next to the iron gate.",
+   "_episode": null
+  },
+  {
+   "#": "4",
+   "Image": "",
+   "Location": "On the roof of the rotating cabin materialized by the lighting the \"cabin\" word.",
+   "_episode": null
+  },
+  {
+   "#": "5",
+   "Image": "",
+   "Location": "On a bed frame found across the road of Stucky's Gas Station, to the right.",
+   "_episode": null
+  },
+  {
+   "#": "6",
+   "Image": "",
+   "Location": "On the bridge, next to the log truck.",
+   "_episode": null
+  },
+  {
+   "#": "7",
+   "Image": "",
+   "Location": "Lying on the ground near a rusty ship, after descending down the tree uprooted by Thomas Zane.",
+   "_episode": null
+  },
+  {
+   "#": "8",
+   "Image": "",
+   "Location": "Inside an old derelict plane.",
+   "_episode": null
+  },
+  {
+   "#": "9",
+   "Image": "",
+   "Location": "On an armchair behind the lighthouse.",
+   "_episode": null
+  },
+  {
+   "#": "10",
+   "Image": "",
+   "Location": "On a log at the vista view overlooking Diver's Isle.",
+   "_episode": null
+  }
+ ]
+}

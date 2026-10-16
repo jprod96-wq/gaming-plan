@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="sync.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Companion</title>
+<style>
+  /* Same colour roles as tracker.html; --accent is set per game from slot colours 1-4 */
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --hairline: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --good: #0ca30c; --warning: #fab219;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --accent: var(--s1);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --page: #f9f9f7; --surface: #fcfcfb;
+      --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+      --hairline: #e1e0d9; --border: rgba(11,11,11,0.10);
+      --good: #006300;
+      --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px 20px 64px; background: var(--page); color: var(--text-primary);
+         font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  a { color: var(--text-secondary); }
+  .head { display: flex; gap: 16px; align-items: center; margin: 10px 0 16px; }
+  .head img { width: 64px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+  h1 { font-size: 24px; margin: 0; }
+  .source { font-size: 12px; color: var(--text-muted); }
+  button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--border);
+           background: transparent; color: var(--text-primary); padding: 6px 12px; min-height: 36px; }
+  button:hover { background: var(--hairline); }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .tile .label { color: var(--text-secondary); font-size: 13px; }
+  .tile .value { font-size: 24px; font-weight: 650; margin: 2px 0 8px; }
+  .meter { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 20%, var(--surface)); overflow: hidden; }
+  .meter > span { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 20px 0 14px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .search { margin-left: auto; min-width: 220px; flex: 1; max-width: 320px; font: inherit; padding: 8px 12px;
+            border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); }
+  .hint { color: var(--text-muted); font-size: 13px; margin: 0 0 12px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin: -4px 0 12px; }
+  .filters button { font-size: 12px; min-height: 28px; padding: 2px 10px; }
+  .filters button.on { background: var(--hairline); border-color: var(--text-secondary); font-weight: 600; }
+
+  .list { display: grid; gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .card.done { opacity: .55; }
+  .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .name { font-weight: 600; font-size: 16px; }
+  .chip { font-size: 12px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
+  .spacer { flex: 1; }
+  .star { border: none; font-size: 20px; padding: 0 4px; min-height: 0; color: var(--text-muted); }
+  .star.on { color: var(--warning); }
+  .done-toggle.on { background: var(--good); border-color: var(--good); color: #fff; }
+  .mats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .mat { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--border);
+         border-radius: 8px; padding: 4px 8px; cursor: pointer; user-select: none; }
+  .mat input { width: 16px; height: 16px; accent-color: var(--good); margin: 0; }
+  .mat.got { color: var(--text-muted); text-decoration: line-through; }
+  .sub { font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+  .verify { font-size: 12px; color: var(--text-muted); }
+  .group-title { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin: 18px 0 6px; font-weight: 600; }
+  .need { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--hairline); }
+  .need:first-of-type { border-top: none; }
+  .need .what { flex: 1; }
+  .need .qty { font-weight: 650; }
+  .tip .name { font-size: 15px; }
+  .empty { color: var(--text-secondary); background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; padding: 18px; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--surface);
+           border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; opacity: 0;
+           transition: opacity .2s; pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="tracker.html">← Gaming Plan</a>
+  <div class="head" id="head"></div>
+  <div class="stats" id="stats"></div>
+  <div class="bar">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <input class="search" id="search" type="search" placeholder="Search…" aria-label="Search">
+  </div>
+  <div id="view"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/*
+  Generic companion engine. Opened as companion.html?game=<id>, loads companions/<id>.js,
+  which defines COMPANION = { id, title, source, accent (1-4), shoppingLabel, sources, sections: [...] }.
+  Section types: "checklist" (items to tick, optional materials) and "tips". See NOTES.md for the schema.
+*/
+const gameId = new URLSearchParams(location.search).get("game");
+let C, S, tab, query = "", tagFilter = null;
+
+if (!gameId) fail("No game chosen. Open this page from a game card in the Gaming Plan.");
+else {
+  const s = document.createElement("script");
+  s.src = `companions/${encodeURIComponent(gameId)}.js`;
+  s.onload = () => { if (typeof COMPANION === "undefined") fail("The data file is broken."); else init(COMPANION); };
+  s.onerror = () => fail(`No companion data for "${esc(gameId)}" yet. Ask Claude to make one.`);
+  document.head.appendChild(s);
+}
+
+function fail(msg) { document.getElementById("view").innerHTML = `<div class="empty">${msg}</div>`; }
+
+function init(data) {
+  C = data;
+  document.title = `${C.title} Companion`;
+  document.documentElement.style.setProperty("--accent", `var(--s${C.accent || 1})`);
+  S = load();
+  const ids = tabs().map(t => t.id);
+  tab = ids.includes(S.tab) ? S.tab : ids[0];
+  document.getElementById("head").innerHTML = `
+    <img src="covers/${esc(C.id)}.jpg" alt="" onerror="this.remove()">
+    <div><h1>${esc(C.title)} Companion</h1>${C.source ? `<div class="source">Data: ${esc(C.source)}</div>` : ""}</div>`;
+  render();
+}
+
+const KEY = () => `companion.${C.id}.v1`;
+function load() {
+  const empty = { done: {}, got: {}, want: {} };
+  try { return Object.assign(empty, JSON.parse(localStorage.getItem(KEY()))); } catch { return empty; }
+}
+function save() { localStorage.setItem(KEY(), JSON.stringify(S)); }
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+// ---------- Model helpers ----------
+const checklists = () => C.sections.filter(s => s.type === "checklist");
+const hasMaterials = () => checklists().some(s => s.items.some(i => i.materials?.length));
+function tabs() {
+  const t = [];
+  if (hasMaterials()) t.push({ id: "_shop", label: C.shoppingLabel || "🎯 Shopping list" });
+  C.sections.forEach(s => t.push({ id: s.id, label: s.label }));
+  return t;
+}
+const k = (sec, id) => `${sec}:${id}`;
+const isDone = (sec, id) => !!S.done[k(sec, id)];
+const isWanted = (sec, id) => !!S.want[k(sec, id)];
+const matches = (...f) => !query || f.flat().join(" ").toLowerCase().includes(query);
+
+// ---------- Rendering ----------
+function render() {
+  renderStats();
+  document.getElementById("tabs").innerHTML = tabs().map(t =>
+    `<button role="tab" aria-selected="${tab === t.id}" data-tab="${t.id}">${esc(t.label)}</button>`).join("");
+  const sec = C.sections.find(s => s.id === tab);
+  document.getElementById("view").innerHTML =
+    tab === "_shop" ? viewShop() : sec.type === "tips" ? viewTips(sec) : viewChecklist(sec);
+}
+
+function renderStats() {
+  document.getElementById("stats").innerHTML = checklists().map(s => {
+    const a = s.items.filter(i => isDone(s.id, i.id)).length, b = s.items.length;
+    const label = s.label.replace(/^\P{L}+/u, ""); // drop the leading emoji
+    return `<div class="tile"><div class="label">${esc(label)}</div><div class="value">${a} / ${b}</div>
+      <div class="meter" role="progressbar" aria-label="${esc(label)}" aria-valuemin="0" aria-valuemax="${b}" aria-valuenow="${a}"
+           title="${a} of ${b}"><span style="width:${b ? a / b * 100 : 0}%"></span></div></div>`;
+  }).join("");
+}
+
+function viewShop() {
+  const all = checklists().flatMap(s => s.items.filter(i => i.materials?.length).map(i => ({ ...i, sec: s.id, shopDefault: s.shopDefault })));
+  const anyWanted = all.some(i => isWanted(i.sec, i.id) && !isDone(i.sec, i.id));
+  // Nothing starred → only sections marked shopDefault (keeps huge sections from drowning the list)
+  const pool = all.filter(i => !isDone(i.sec, i.id) && (anyWanted ? isWanted(i.sec, i.id) : i.shopDefault));
+  const groups = {};
+  pool.forEach(item => item.materials.forEach((m, n) => {
+    if (S.got[`${item.sec}:${item.id}:${n}`]) return;
+    const key = m.source || m.item;
+    const g = groups[key] ||= { source: key, needs: {} };
+    const need = g.needs[m.item] ||= { item: m.item, qty: 0, for: [], refs: [] };
+    need.qty += m.qty || 1; need.for.push(item.name); need.refs.push(`${item.sec}:${item.id}:${n}`);
+  }));
+  const list = Object.values(groups)
+    .filter(g => matches(g.source, Object.values(g.needs).flatMap(n => [n.item, ...n.for])))
+    .sort((a, b) => Object.keys(b.needs).length - Object.keys(a.needs).length || a.source.localeCompare(b.source));
+  const intro = anyWanted ? "Showing materials for your ☆ starred items. Unstar everything to reset."
+                          : "☆ Star items in the other tabs to build your shopping list.";
+  if (!list.length) return `<p class="hint">${intro}</p><div class="empty">${query ? "Nothing matches your search." : anyWanted ? "🎉 You have everything for your starred items!" : "Nothing here yet. Star something you want to make."}</div>`;
+  return `<p class="hint">${intro}</p><div class="list">${list.map(g => {
+    const where = C.sources?.[g.source];
+    return `<div class="card"><div class="row"><span class="name">${esc(g.source)}</span></div>
+      ${where ? `<div class="sub">📍 ${esc(where)}</div>` : ""}
+      <div style="margin-top:8px">${Object.values(g.needs).map(n => `
+        <div class="need"><div class="what"><span class="qty">${n.qty}×</span> ${esc(n.item)}
+          <div class="sub">for ${esc([...new Set(n.for)].join(", "))}</div></div>
+          <button data-act="gotone" data-ref="${n.refs[0]}">✓ Got it</button></div>`).join("")}</div></div>`;
+  }).join("")}</div>`;
+}
+
+function filterBar(sec) {
+  const tags = [...new Set(sec.items.flatMap(i => i.tags || []))];
+  if (tags.length < 2 || tags.length > 14) return "";
+  return `<div class="filters">${["All", ...tags].map(t => {
+    const on = (t === "All" && !tagFilter) || t === tagFilter;
+    return `<button class="${on ? "on" : ""}" data-act="tag" data-tag="${esc(t)}">${esc(t)}</button>`;
+  }).join("")}</div>`;
+}
+
+function viewChecklist(sec) {
+  let items = sec.items.filter(i => matches(i.name, i.tags || [], i.location, i.note, (i.materials || []).flatMap(m => [m.item, m.source])));
+  if (tagFilter) items = items.filter(i => (i.tags || []).includes(tagFilter));
+  items.sort((a, b) => isDone(sec.id, a.id) - isDone(sec.id, b.id) || isWanted(sec.id, b.id) - isWanted(sec.id, a.id));
+  const hint = sec.hint ? `<p class="hint">${esc(sec.hint)}</p>` : "";
+  if (!items.length) return hint + filterBar(sec) + `<div class="empty">${query || tagFilter ? "Nothing matches." : "No entries yet."}</div>`;
+
+  const card = i => {
+    const done = isDone(sec.id, i.id), want = isWanted(sec.id, i.id);
+    return `<div class="card ${done ? "done" : ""}">
+      <div class="row">
+        <button class="star ${want ? "on" : ""}" data-act="want" data-key="${k(sec.id, i.id)}" aria-label="Star ${esc(i.name)}" aria-pressed="${want}">${want ? "★" : "☆"}</button>
+        <span class="name">${esc(i.name)}</span>
+        ${(i.tags || []).map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+        <span class="spacer"></span>
+        <button class="done-toggle ${done ? "on" : ""}" data-act="done" data-key="${k(sec.id, i.id)}">${done ? "✓ " + esc(sec.doneLabel || "Done") : "Mark " + esc((sec.doneLabel || "done").toLowerCase())}</button>
+      </div>
+      ${i.materials?.length ? `<div class="mats">${i.materials.map((m, n) => {
+        const ref = `${sec.id}:${i.id}:${n}`, got = !!S.got[ref];
+        return `<label class="mat ${got ? "got" : ""}"><input type="checkbox" data-act="got" data-ref="${ref}" ${got ? "checked" : ""}>${m.qty || 1}× ${esc(m.item)}</label>`;
+      }).join("")}</div>` : ""}
+      ${i.location ? `<div class="sub">📍 ${esc(i.location)}</div>` : ""}
+      ${i.requires ? `<div class="sub">Requires: ${esc(i.requires)}</div>` : ""}
+      ${i.tip ? `<div class="sub">💡 ${esc(i.tip)}</div>` : ""}
+      ${i.note ? `<div class="sub">${esc(i.note)}</div>` : ""}
+      ${i.verify ? `<div class="verify">⚠ Double-check this one in game</div>` : ""}
+    </div>`;
+  };
+
+  if (!sec.groupBy) return hint + filterBar(sec) + `<div class="list">${items.map(card).join("")}</div>`;
+  const groups = {};
+  items.forEach(i => (groups[i[sec.groupBy] || "Other"] ||= []).push(i));
+  return hint + filterBar(sec) + Object.entries(groups).map(([g, xs]) =>
+    `<div class="group-title">${esc(g)}</div><div class="list">${xs.map(card).join("")}</div>`).join("");
+}
+
+function viewTips(sec) {
+  let items = sec.items.filter(t => matches(t.title, t.text, t.tag));
+  if (tagFilter) items = items.filter(t => t.tag === tagFilter);
+  const tagsSec = { items: sec.items.map(t => ({ tags: t.tag ? [t.tag] : [] })) };
+  return (sec.hint ? `<p class="hint">${esc(sec.hint)}</p>` : "") + filterBar(tagsSec) +
+    (items.length ? `<div class="list">${items.map(t => `<div class="card tip">
+      <div class="row"><span class="name">${esc(t.title)}</span>${t.tag ? `<span class="chip">${esc(t.tag)}</span>` : ""}</div>
+      <div class="sub">${esc(t.text)}</div></div>`).join("")}</div>` : `<div class="empty">Nothing matches.</div>`);
+}
+
+// ---------- Actions ----------
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act], [data-tab]");
+  if (!el || !C) return;
+  if (el.dataset.tab) { tab = S.tab = el.dataset.tab; tagFilter = null; save(); render(); return; }
+  const { act, key, ref } = el.dataset;
+  if (act === "tag") { tagFilter = el.dataset.tag === "All" ? null : el.dataset.tag; render(); return; }
+  if (act === "want") S.want[key] = !S.want[key];
+  if (act === "done") { S.done[key] = !S.done[key]; if (S.done[key]) toast("Done ✓"); }
+  if (act === "gotone") { S.got[ref] = true; toast("Got it ✓"); }
+  if (act === "got") S.got[ref] = el.checked;
+  save(); render();
+});
+document.getElementById("search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); if (C) render(); });
+
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+</script>
+</body>
+</html>

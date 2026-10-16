@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="sync.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDR2 Companion</title>
+<style>
+  /* Same colour roles as tracker.html; accent = Epic slot colour (slot 2) */
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --hairline: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --accent: #d95926; --good: #0ca30c; --warning: #fab219;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --page: #f9f9f7; --surface: #fcfcfb;
+      --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+      --hairline: #e1e0d9; --border: rgba(11,11,11,0.10);
+      --accent: #eb6834; --good: #006300;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px 20px 64px; background: var(--page); color: var(--text-primary);
+         font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  a { color: var(--text-secondary); }
+  h1 { font-size: 24px; margin: 8px 0 16px; }
+  button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--border);
+           background: transparent; color: var(--text-primary); padding: 6px 12px; min-height: 36px; }
+  button:hover { background: var(--hairline); }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Summary tiles with meters */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .tile .label { color: var(--text-secondary); font-size: 13px; }
+  .tile .value { font-size: 24px; font-weight: 650; margin: 2px 0 8px; }
+  .meter { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 20%, var(--surface)); overflow: hidden; }
+  .meter > span { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+
+  /* Tabs + search */
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 20px 0 14px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .search { margin-left: auto; min-width: 220px; flex: 1; max-width: 320px; font: inherit; padding: 8px 12px;
+            border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); }
+  .hint { color: var(--text-muted); font-size: 13px; margin: 0 0 12px; }
+
+  /* Cards & rows */
+  .list { display: grid; gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .card.done { opacity: .55; }
+  .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .name { font-weight: 600; font-size: 16px; }
+  .chip { font-size: 12px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
+  .spacer { flex: 1; }
+  .star { border: none; font-size: 20px; padding: 0 4px; min-height: 0; color: var(--text-muted); }
+  .star.on { color: var(--warning); }
+  .done-toggle.on { background: var(--good); border-color: var(--good); color: #fff; }
+  .mats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .mat { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--border);
+         border-radius: 8px; padding: 4px 8px; cursor: pointer; user-select: none; }
+  .mat input { width: 16px; height: 16px; accent-color: var(--good); margin: 0; }
+  .mat.got { color: var(--text-muted); text-decoration: line-through; }
+  .sub { font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+  .verify { font-size: 12px; color: var(--text-muted); }
+  .group-title { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin: 18px 0 6px; font-weight: 600; }
+  .need { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--hairline); }
+  .need:first-of-type { border-top: none; }
+  .need .what { flex: 1; }
+  .need .qty { font-weight: 650; }
+  .empty { color: var(--text-secondary); background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; padding: 18px; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--surface);
+           border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; opacity: 0;
+           transition: opacity .2s; pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="tracker.html">← Gaming Plan</a>
+  <h1>🤠 RDR2 Companion</h1>
+  <div class="stats" id="stats"></div>
+
+  <div class="bar">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <input class="search" id="search" type="search" placeholder="Search items, pelts, animals…" aria-label="Search">
+  </div>
+  <div id="view"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="rdr2-data.js"></script>
+<script src="rdr2-tips.js"></script>
+<script>
+const TABS = [
+  ["hunt", "🎯 Hunt list"], ["pearson", "🛠 Pearson"], ["trapper", "🧥 Trapper"],
+  ["legendary", "🐻 Legendary"], ["ledger", "📒 Ledger"], ["tips", "💡 Tips"],
+];
+const KEY = "rdr2Companion.v1";
+let S = load();
+let tab = S.tab || "hunt";
+let query = "";
+
+function load() {
+  const empty = { done: {}, got: {}, want: {}, leg: {} };
+  try { return Object.assign(empty, JSON.parse(localStorage.getItem(KEY))); } catch { return empty; }
+}
+function save() { localStorage.setItem(KEY, JSON.stringify(S)); }
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const money = n => "$" + Number(n || 0).toLocaleString(undefined, { maximumFractionDigits: 2 });
+
+// ---------- State helpers ----------
+const isDone = (sec, id) => !!S.done[`${sec}:${id}`];
+const isWanted = (sec, id) => !!S.want[`${sec}:${id}`];
+const legendBy = name => (RDR2.legendary || []).find(l => l.name === name);
+const legendSold = name => { const l = legendBy(name); return !!(l && S.leg[l.id]?.sold); };
+// A material counts as collected if ticked, or (Trapper) if that legendary pelt was sold to the Trapper
+const matGot = (sec, item, i) => !!S.got[`${sec}:${item.id}:${i}`] || (sec === "trapper" && legendSold(item.materials[i].animal));
+const craftables = () => [
+  ...(RDR2.pearson || []).map(x => ({ ...x, sec: "pearson" })),
+  ...(RDR2.trapper || []).map(x => ({ ...x, sec: "trapper" })),
+];
+const matches = (...fields) => !query || fields.join(" ").toLowerCase().includes(query);
+
+// ---------- Rendering ----------
+function render() {
+  renderStats();
+  document.getElementById("tabs").innerHTML = TABS.map(([id, label]) =>
+    `<button role="tab" aria-selected="${tab === id}" data-tab="${id}">${label}</button>`).join("");
+  const view = { hunt: viewHunt, pearson: () => viewCraft("pearson"), trapper: () => viewCraft("trapper"),
+                 legendary: viewLegendary, ledger: viewLedger, tips: viewTips }[tab];
+  document.getElementById("view").innerHTML = view();
+}
+
+function renderStats() {
+  const count = sec => [(RDR2[sec] || []).filter(x => isDone(sec, x.id)).length, (RDR2[sec] || []).length];
+  const leg = RDR2.legendary || [];
+  const legDone = leg.filter(l => S.leg[l.id]?.hunted).length;
+  const ledger = RDR2.ledger || [];
+  const open = ledger.filter(x => !isDone("ledger", x.id));
+  const left = open.reduce((n, x) => n + (x.cost || 0), 0);
+  const unpriced = open.some(x => x.cost == null); // some prices aren't in the wiki text
+  const tile = (label, [a, b], valueText) =>
+    `<div class="tile"><div class="label">${label}</div><div class="value">${valueText ?? `${a} / ${b}`}</div>
+     <div class="meter" role="progressbar" aria-label="${label}" aria-valuemin="0" aria-valuemax="${b}" aria-valuenow="${a}"
+          title="${a} of ${b}"><span style="width:${b ? a / b * 100 : 0}%"></span></div></div>`;
+  const [ld, lt] = count("ledger");
+  document.getElementById("stats").innerHTML = [
+    tile("Pearson crafted", count("pearson")),
+    tile("Trapper items", count("trapper")),
+    tile("Legendary hunted", [legDone, leg.length]),
+    tile("Ledger: still needed", [ld, lt], money(left) + (unpriced ? "+" : "")),
+  ].join("");
+}
+
+function viewHunt() {
+  const anyWanted = craftables().some(x => isWanted(x.sec, x.id) && !isDone(x.sec, x.id));
+  // Nothing starred → Pearson only (the Trapper's 123 items would drown the list)
+  const pool = craftables().filter(x => !isDone(x.sec, x.id) && (anyWanted ? isWanted(x.sec, x.id) : x.sec === "pearson"));
+  // Group missing materials by animal, then by material
+  const groups = {};
+  pool.forEach(item => item.materials.forEach((m, i) => {
+    if (matGot(item.sec, item, i)) return;
+    const key = m.animal || m.item;
+    const g = groups[key] ||= { animal: key, needs: {} };
+    const n = g.needs[m.item] ||= { item: m.item, qty: 0, for: [], refs: [] };
+    n.qty += m.qty || 1;
+    n.for.push(item.name);
+    n.refs.push(`${item.sec}:${item.id}:${i}`);
+  }));
+  const list = Object.values(groups)
+    .filter(g => matches(g.animal, ...Object.values(g.needs).flatMap(n => [n.item, ...n.for])))
+    .sort((a, b) => Object.keys(b.needs).length - Object.keys(a.needs).length || a.animal.localeCompare(b.animal));
+
+  const intro = anyWanted
+    ? `Showing materials for your ☆ starred items only. Unstar everything to see the full list.`
+    : `Showing materials for all of Pearson's items not yet crafted. ☆ Star items in Pearson / Trapper to focus this list.`;
+  if (!list.length) return `<p class="hint">${intro}</p><div class="empty">${query ? "Nothing matches your search." : "🎉 Nothing left to hunt for these items!"}</div>`;
+
+  return `<p class="hint">${intro}</p><div class="list">${list.map(g => {
+    const leg = legendBy(g.animal);
+    const where = RDR2.animals?.[g.animal] || (leg ? `${leg.region}: ${leg.location}` : "");
+    return `<div class="card">
+      <div class="row"><span class="name">${esc(g.animal)}</span>${leg ? `<span class="chip">Legendary</span>` : ""}</div>
+      ${where ? `<div class="sub">📍 ${esc(where)}</div>` : ""}
+      <div style="margin-top:8px">${Object.values(g.needs).map(n => `
+        <div class="need"><div class="what"><span class="qty">${n.qty}×</span> ${esc(n.item)}
+          <div class="sub">for ${esc([...new Set(n.for)].join(", "))}</div></div>
+          <button data-act="gotone" data-ref="${n.refs[0]}">✓ Got it</button></div>`).join("")}
+      </div></div>`;
+  }).join("")}</div>`;
+}
+
+function viewCraft(sec) {
+  const items = (RDR2[sec] || []).filter(x => matches(x.name, x.category, x.requires, ...x.materials.flatMap(m => [m.item, m.animal])));
+  if (!items.length) return `<div class="empty">${query ? "Nothing matches your search." : "No data yet."}</div>`;
+  items.sort((a, b) => isDone(sec, a.id) - isDone(sec, b.id) || isWanted(sec, b.id) - isWanted(sec, a.id));
+  return `<p class="hint">☆ Star what you're working toward. It drives the Hunt list. Tick materials as you collect them.</p>
+  <div class="list">${items.map(x => {
+    const done = isDone(sec, x.id), want = isWanted(sec, x.id);
+    return `<div class="card ${done ? "done" : ""}">
+      <div class="row">
+        <button class="star ${want ? "on" : ""}" data-act="want" data-key="${sec}:${x.id}" aria-label="Star ${esc(x.name)}" aria-pressed="${want}">${want ? "★" : "☆"}</button>
+        <span class="name">${esc(x.name)}</span>
+        ${x.category ? `<span class="chip">${esc(x.category)}</span>` : ""}
+        ${x.price != null ? `<span class="chip">${money(x.price)}</span>` : ""}
+        <span class="spacer"></span>
+        <button class="done-toggle ${done ? "on" : ""}" data-act="done" data-key="${sec}:${x.id}">${done ? "✓ Crafted" : "Mark crafted"}</button>
+      </div>
+      <div class="mats">${x.materials.map((m, i) => {
+        const got = matGot(sec, x, i), auto = got && !S.got[`${sec}:${x.id}:${i}`];
+        return `<label class="mat ${got ? "got" : ""}" title="${auto ? "Pelt sold to the Trapper (Legendary tab)" : ""}">
+          <input type="checkbox" data-act="got" data-ref="${sec}:${x.id}:${i}" ${got ? "checked" : ""} ${auto ? "disabled" : ""}>
+          ${m.qty || 1}× ${esc(m.item)}</label>`;
+      }).join("")}</div>
+      ${x.requires ? `<div class="sub">Requires: ${esc(x.requires)}</div>` : ""}
+      ${x.note ? `<div class="sub">${esc(x.note)}</div>` : ""}
+      ${x.verify ? `<div class="verify">⚠ Double-check this one in game</div>` : ""}
+    </div>`;
+  }).join("")}</div>`;
+}
+
+function viewLegendary() {
+  const items = (RDR2.legendary || []).filter(l => matches(l.name, l.region, l.location));
+  if (!items.length) return `<div class="empty">${query ? "Nothing matches your search." : "No data yet."}</div>`;
+  return `<p class="hint">Selling a legendary pelt to the Trapper unlocks his items, and the matching Trapper materials tick themselves.</p>
+  <div class="list">${items.map(l => {
+    const st = S.leg[l.id] || {};
+    return `<div class="card ${st.hunted && st.sold ? "done" : ""}">
+      <div class="row"><span class="name">${esc(l.name)}</span><span class="chip">${esc(l.region)}</span><span class="spacer"></span>
+        <button class="done-toggle ${st.hunted ? "on" : ""}" data-act="leg" data-id="${l.id}" data-f="hunted">${st.hunted ? "✓ Hunted" : "Hunted?"}</button>
+        <button class="done-toggle ${st.sold ? "on" : ""}" data-act="leg" data-id="${l.id}" data-f="sold">${st.sold ? "✓ Sold to Trapper" : "Sold to Trapper?"}</button></div>
+      <div class="sub">📍 ${esc(l.location)}</div>
+      ${l.unlock ? `<div class="sub">Unlock: ${esc(l.unlock)}</div>` : ""}
+      ${l.note ? `<div class="sub">${esc(l.note)}</div>` : ""}
+      ${l.verify ? `<div class="verify">⚠ Double-check this one in game</div>` : ""}
+    </div>`;
+  }).join("")}</div>`;
+}
+
+function viewLedger() {
+  const items = (RDR2.ledger || []).filter(x => matches(x.name, x.group, x.effect));
+  if (!items.length) return `<div class="empty">${query ? "Nothing matches your search." : "No data yet."}</div>`;
+  const groups = {};
+  items.forEach(x => (groups[x.group || "Other"] ||= []).push(x));
+  return `<p class="hint">Bought with money in the ledger at camp. Upgrades for the gang, Arthur's tent and the horse station.</p>` +
+    Object.entries(groups).map(([group, xs]) => `<div class="group-title">${esc(group)}</div><div class="list">${xs.map(x => {
+      const done = isDone("ledger", x.id);
+      return `<div class="card ${done ? "done" : ""}">
+        <div class="row"><span class="name">${esc(x.name)}</span><span class="chip">${x.cost == null ? "price: see ledger" : money(x.cost)}</span><span class="spacer"></span>
+          <button class="done-toggle ${done ? "on" : ""}" data-act="done" data-key="ledger:${x.id}">${done ? "✓ Bought" : "Mark bought"}</button></div>
+        ${x.effect ? `<div class="sub">${esc(x.effect)}</div>` : ""}
+        ${x.requires ? `<div class="sub">Requires: ${esc(x.requires)}</div>` : ""}
+        ${x.verify ? `<div class="verify">⚠ Double-check this one in game</div>` : ""}
+      </div>`;
+    }).join("")}</div>`).join("");
+}
+
+function viewTips() {
+  const items = (RDR2.tips || []).filter(t => matches(t.title, t.text, t.tag));
+  if (!items.length) return `<div class="empty">${query ? "Nothing matches your search." : "No tips yet."}</div>`;
+  return `<p class="hint">Spoiler-free tips for hunting, camp and survival.</p><div class="list">${items.map(t => `
+    <div class="card"><div class="row"><span class="name">${esc(t.title)}</span><span class="chip">${esc(t.tag)}</span></div>
+      <div class="sub">${esc(t.text)}</div></div>`).join("")}</div>`;
+}
+
+// ---------- Actions ----------
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act], [data-tab]");
+  if (!el) return;
+  if (el.dataset.tab) { tab = S.tab = el.dataset.tab; save(); render(); return; }
+  const { act, key, ref } = el.dataset;
+  if (act === "want") S.want[key] = !S.want[key];
+  if (act === "done") {
+    S.done[key] = !S.done[key];
+    if (S.done[key]) toast(key.startsWith("ledger") ? "Upgrade bought ✓" : "Crafted! ✓");
+  }
+  if (act === "gotone") { S.got[ref] = true; toast("Got it ✓"); }
+  if (act === "got") S.got[ref] = el.checked;
+  if (act === "leg") {
+    const st = S.leg[el.dataset.id] ||= {};
+    st[el.dataset.f] = !st[el.dataset.f];
+    if (el.dataset.f === "sold" && st.sold) st.hunted = true;
+  }
+  save(); render();
+});
+
+document.getElementById("search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); render(); });
+
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+if (typeof RDR2 === "undefined") {
+  document.getElementById("view").innerHTML = `<div class="empty">Data file <code>rdr2-data.js</code> is missing. Ask Claude to rebuild it.</div>`;
+} else {
+  render();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Raw wiki downloads: only needed to rebuild data, not for the website
+rdr2-raw/
+companions/_raw/
+# Local-only notes (e.g. sync id), never published
+.local/
