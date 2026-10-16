@@ -58,3 +58,4 @@ Personal dashboard to finish games instead of growing the backlog.
 - 2026-10-16: Hades companion: 31 keepsakes/companions, 24 aspects (Titan Blood per level → Resources tab), 55 prophecies (2 hidden as story spoilers), 12 mirror pairs, 13 tips. Late-game character + hidden aspects anonymised.
 - 2026-10-16: game-companion skill: displayed-fields list, structural spoiler checklist, Python emoji note. "Copy for Claude" now sends a `Shelf:` list (all finished/dropped games + date + rating) instead of only rated games; add-game skill reads it and refills empty slots.
 - 2026-10-16: Published to GitHub Pages (https://jprod96-wq.github.io/gaming-plan/, repo jprod96-wq/gaming-plan). Gist sync live (sync.js). Desktop shortcut now opens the website. Sync id stored in .local/sync-id.
+- 2026-10-16: Skills now publish automatically (git push) and add-game reads synced progress directly ("check my tracker", mode C, with .local/processed.json). Message box hint updated.
