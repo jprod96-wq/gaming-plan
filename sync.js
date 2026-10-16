@@ -123,7 +123,11 @@
       border: 1px solid var(--border); background: var(--page); color: var(--text-primary); }
     .gps-panel button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--border);
       background: transparent; color: var(--text-primary); padding: 5px 12px; margin-right: 6px; }
-    .gps-panel code { font-size: 12px; word-break: break-all; }`;
+    .gps-panel code { font-size: 12px; word-break: break-all; }
+    @media (max-width: 760px) { /* phones: top-right, clear of the tracker's bottom nav */
+      .gps-btn { left: auto; right: 12px; bottom: auto; top: calc(12px + env(safe-area-inset-top)); }
+      .gps-panel { left: auto; right: 12px; bottom: auto; top: calc(56px + env(safe-area-inset-top)); }
+    }`;
   const style = document.createElement("style"); style.textContent = css; document.head.appendChild(style);
   const btn = document.createElement("button"); btn.className = "gps-btn";
   const panel = document.createElement("div"); panel.className = "gps-panel"; panel.hidden = true;
@@ -154,6 +158,9 @@
       panel.querySelector("#gps-off").onclick = disconnect;
     }
   }
+
+  // Offline support / app install (sw.js); only works on the https site, not the local file
+  if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js");
 
   // Pull when the page opens or comes back into view; push right away when leaving
   if (token()) pull();

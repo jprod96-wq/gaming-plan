@@ -3,14 +3,20 @@
 <head>
 <meta charset="utf-8">
 <script src="sync.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gaming Plan Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Gaming Plan</title>
 <style>
   /* ---- Colour roles (dataviz reference palette, slots 1-4) ---- */
   :root {
     color-scheme: dark;
     --page: #0d0d0d;
     --surface: #1a1a19;
+    --surface-2: #222220;
     --text-primary: #f0efec;
     --text-secondary: #c3c2b7;
     --text-muted: #898781;
@@ -18,12 +24,14 @@
     --border: rgba(255,255,255,0.10);
     --good: #0ca30c;
     --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --nav-h: 64px;
   }
   @media (prefers-color-scheme: light) {
     :root {
       color-scheme: light;
       --page: #f9f9f7;
       --surface: #fcfcfb;
+      --surface-2: #f0efec;
       --text-primary: #0b0b0b;
       --text-secondary: #52514e;
       --text-muted: #898781;
@@ -34,91 +42,119 @@
     }
   }
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
-    margin: 0; padding: 32px 24px 64px;
-    background: var(--page); color: var(--text-primary);
+    margin: 0; background: var(--page); color: var(--text-primary);
     font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  .wrap { max-width: 1100px; margin: 0 auto; }
-  h1 { font-size: 26px; margin: 0 0 4px; }
-  h2 { font-size: 17px; margin: 40px 0 12px; }
-  .sub { color: var(--text-secondary); margin: 0 0 24px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 64px; }
+  h2 { font-size: 18px; margin: 40px 0 12px; }
   button {
-    font: inherit; cursor: pointer; border-radius: 8px;
+    font: inherit; cursor: pointer; border-radius: 10px;
     border: 1px solid var(--border); background: transparent; color: var(--text-primary);
-    padding: 6px 12px;
+    padding: 8px 14px; min-height: 40px;
   }
   button:hover { background: var(--hairline); }
-  button:focus-visible, input:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+
+  /* ---- Top bar ---- */
+  .topbar { max-width: 1100px; margin: 0 auto; padding: 28px 24px 20px; }
+  .brand { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
+  .tagline { color: var(--text-secondary); margin-top: 2px; }
 
   /* ---- Stat tiles ---- */
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
   .tile .label { color: var(--text-secondary); font-size: 13px; }
-  .tile .value { font-size: 34px; font-weight: 650; margin-top: 2px; }
+  .tile .value { font-size: 30px; font-weight: 700; margin-top: 2px; }
   .tile .hint { color: var(--text-muted); font-size: 12px; }
 
-  /* ---- Slot cards ---- */
-  .slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 24px; }
+  /* ---- Slot cards (launcher style) ---- */
+  .dots { display: none; }
+  .slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px; }
   .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 18px; display: flex; flex-direction: column; gap: 12px;
-    border-top: 4px solid var(--c);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    overflow: hidden; display: flex; flex-direction: column;
   }
-  .slot-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
-  .slot-head .moment { margin-left: auto; color: var(--text-muted); text-align: right; }
-  .title-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .game-title { font-size: 20px; font-weight: 650; }
-  .chip { font-size: 12px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
+  .hero {
+    position: relative; height: 210px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--c) 45%, var(--surface)), var(--surface));
+  }
+  .hero-bg {
+    position: absolute; inset: -20%; width: 140%; height: 140%; object-fit: cover;
+    filter: blur(28px) saturate(1.3); opacity: .55;
+  }
+  .hero::after { /* fade the art into the card */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 45%, var(--surface));
+  }
+  .hero-cover {
+    position: relative; z-index: 1; height: 172px; aspect-ratio: 3 / 4; object-fit: cover;
+    border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.55);
+  }
+  .slot-badge, .moment-badge {
+    position: absolute; z-index: 2; top: 12px; font-size: 12px; font-weight: 600;
+    background: rgba(0,0,0,.55); color: #f0efec; border-radius: 999px; padding: 4px 10px;
+    display: flex; align-items: center; gap: 6px; backdrop-filter: blur(6px);
+  }
+  .slot-badge { left: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .moment-badge { right: 12px; font-weight: 500; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
 
-  /* Meter: same-ramp track, 4px rounded ends */
+  .body { padding: 4px 18px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .title-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .game-title { font-size: 21px; font-weight: 700; line-height: 1.2; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { font-size: 12px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; text-decoration: none; }
+  a.chip { color: var(--text-primary); background: var(--surface-2); }
+
+  /* Meter: same-ramp track, rounded ends */
   .meter { height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--c) 20%, var(--surface)); overflow: hidden; }
-  .meter > span { display: block; height: 100%; border-radius: 5px; background: var(--c); transition: width .4s ease; }
+  .meter > span { display: block; height: 100%; border-radius: 5px; background: var(--c); transition: width .5s ease; }
   .meter-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
 
-  .next {
-    display: flex; align-items: center; gap: 10px;
-    background: color-mix(in srgb, var(--c) 10%, var(--surface));
-    border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+  .lastnote {
+    font-size: 13px; color: var(--text-secondary); background: var(--surface-2); border-radius: 10px; padding: 8px 10px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .next .what { flex: 1; }
-  .next .what small { display: block; color: var(--text-muted); font-size: 12px; }
-  .done-btn { background: var(--c); color: #fff; border: none; font-weight: 600; padding: 8px 14px; white-space: nowrap; }
+  .next { display: flex; align-items: center; gap: 12px; }
+  .next .what { flex: 1; min-width: 0; }
+  .next .what small { display: block; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  .next .what span { font-weight: 600; }
+  .done-btn { background: var(--c); color: #fff; border: none; font-weight: 700; padding: 10px 20px; white-space: nowrap; min-height: 48px; border-radius: 12px; }
   .done-btn:hover { background: var(--c); filter: brightness(1.1); }
+  .done-btn:active { transform: scale(.97); }
 
-  details summary { cursor: pointer; color: var(--text-secondary); font-size: 13px; }
-  ul.steps { list-style: none; padding: 0; margin: 8px 0 0; }
-  ul.steps li { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--hairline); }
+  details { border-top: 1px solid var(--hairline); padding-top: 10px; }
+  details summary { cursor: pointer; color: var(--text-secondary); font-size: 14px; list-style: none; display: flex; justify-content: space-between; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: "▾"; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(180deg); }
+  .details-body { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  ul.steps { list-style: none; padding: 0; margin: 0; }
+  ul.steps li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--hairline); }
   ul.steps li:last-child { border-bottom: none; }
-  ul.steps input { width: 16px; height: 16px; accent-color: var(--c); }
+  ul.steps input { width: 20px; height: 20px; accent-color: var(--c); flex: none; }
   ul.steps label { flex: 1; cursor: pointer; }
   ul.steps li.checked label { color: var(--text-muted); text-decoration: line-through; }
-  .edit-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
-  .edit-row button { font-size: 12px; padding: 3px 9px; }
+  .edit-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .edit-row button { font-size: 13px; padding: 4px 10px; min-height: 34px; }
   .approx { font-size: 12px; color: var(--text-muted); }
+  .link-btn { border: none; color: var(--text-muted); font-size: 13px; padding: 2px 6px; min-height: 0; }
 
-  .queue { font-size: 13px; color: var(--text-secondary); }
-  .queue span.q { display: inline-block; margin: 4px 6px 0 0; }
-  .card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-  .link-btn { border: none; color: var(--text-muted); font-size: 12px; padding: 2px 4px; }
+  .card-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+  .queue { font-size: 12px; color: var(--text-muted); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .drop-btn { font-size: 13px; min-height: 34px; padding: 4px 12px; color: var(--text-secondary); }
   .empty { color: var(--text-secondary); }
+  .card .empty { padding: 18px; }
 
-  /* ---- Friends + shelf ---- */
-  .friends { background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; padding: 14px 18px; color: var(--text-secondary); }
-  .shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-  .trophy { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-  .trophy .t { font-weight: 600; }
-  .trophy .d { font-size: 12px; color: var(--text-muted); }
-  .badge-good { color: var(--good); font-weight: 600; }
-
-  /* ---- Plan: rules + parked ---- */
-  .rules { display: flex; flex-wrap: wrap; gap: 8px; margin: -12px 0 24px; }
-  .rule { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--text-secondary); }
+  /* ---- Plan, friends, shelf, companions, message ---- */
+  .rules { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .rule { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; font-size: 13px; color: var(--text-secondary); }
   .rule b { color: var(--text-primary); font-weight: 600; }
   .plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
-  .box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+  .box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; }
   .box h3 { font-size: 14px; margin: 0 0 10px; }
   .box h4 { font-size: 12px; margin: 12px 0 4px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
   .box h4:first-of-type { margin-top: 0; }
@@ -126,79 +162,157 @@
   .box li { padding: 3px 0; display: flex; gap: 8px; align-items: baseline; }
   .box li .dot { position: relative; top: 1px; }
   .box li b { color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+  .friends { margin-top: 12px; background: var(--surface); border: 1px dashed var(--border); border-radius: 14px; padding: 14px 18px; color: var(--text-secondary); }
 
-  /* ---- Covers, notes, ratings, message box ---- */
-  .game-head { display: flex; gap: 14px; align-items: flex-start; }
-  .game-head > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-  .cover { width: 72px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); flex: none; }
-  .trophy .cover { width: 48px; }
-  textarea {
-    width: 100%; resize: vertical; min-height: 54px; font: inherit; font-size: 14px;
-    background: var(--page); color: var(--text-primary);
-    border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
-  }
-  .field-label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
-  .trophy { display: flex; gap: 12px; }
-  .trophy > div { flex: 1; min-width: 0; }
+  .shelf, .comp-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .trophy, .comp { display: flex; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+  .trophy > div, .comp > div { flex: 1; min-width: 0; }
+  .thumb { width: 56px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; flex: none; }
+  .trophy .t, .comp .t { font-weight: 600; }
+  .trophy .d, .comp .d { font-size: 12px; color: var(--text-muted); }
+  .badge-good { color: var(--good); font-weight: 600; }
   .rate { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
-  .rate button { font-size: 12px; padding: 2px 7px; }
+  .rate button { font-size: 12px; padding: 3px 8px; min-height: 32px; }
   .rate button.on { background: var(--hairline); border-color: var(--text-secondary); font-weight: 600; }
   .ask { font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
+  .comp a { display: inline-block; margin-top: 8px; }
+
+  textarea {
+    width: 100%; resize: vertical; min-height: 60px; font: inherit; font-size: 15px;
+    background: var(--page); color: var(--text-primary);
+    border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px;
+  }
+  .field-label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
   .msg { display: flex; flex-direction: column; gap: 10px; }
   .msg-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--text-muted); font-size: 13px; }
+  .backup { margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; color: var(--text-muted); font-size: 13px; }
 
-  .backup { margin-top: 40px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; color: var(--text-muted); font-size: 13px; }
+  /* ---- Bottom nav (phones only) ---- */
+  .bottomnav { display: none; }
 
   /* ---- Toast + confetti ---- */
   .toast {
     position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
     background: var(--surface); color: var(--text-primary); border: 1px solid var(--border);
-    border-radius: 12px; padding: 12px 18px; box-shadow: 0 8px 30px rgba(0,0,0,.35);
-    opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none; z-index: 10;
+    border-radius: 12px; padding: 12px 18px; box-shadow: 0 8px 30px rgba(0,0,0,.35); max-width: calc(100vw - 32px);
+    opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none; z-index: 30;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .confetti { position: fixed; top: -12px; width: 8px; height: 14px; border-radius: 2px; z-index: 9; animation: fall 1.8s ease-in forwards; }
+  .confetti { position: fixed; top: -12px; width: 8px; height: 14px; border-radius: 2px; z-index: 29; animation: fall 1.8s ease-in forwards; }
   @keyframes fall { to { transform: translateY(105vh) rotate(540deg); opacity: .6; } }
-  @media (prefers-reduced-motion: reduce) { .confetti { display: none; } .meter > span { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .confetti { display: none; } .meter > span { transition: none; } .slots { scroll-behavior: auto; } }
+
+  /* ================= Phones ================= */
+  @media (max-width: 760px) {
+    body { padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom)); }
+    .topbar { padding: calc(14px + env(safe-area-inset-top)) 16px 10px; padding-right: 130px; } /* room for the ☁ Sync button */
+    .brand { font-size: 21px; }
+    .tagline { display: none; }
+    .wrap { padding: 0 16px 24px; }
+    h2 { margin: 18px 0 12px; }
+
+    /* One section at a time, picked in the bottom nav */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    .stats { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .tile { padding: 8px 6px; text-align: center; border-radius: 12px; }
+    .tile .label { font-size: 10px; line-height: 1.2; }
+    .tile .value { font-size: 20px; }
+    .tile .hint { display: none; }
+
+    /* Swipeable slot carousel with a peek of the next card */
+    .dots { display: flex; justify-content: center; gap: 8px; margin: 14px 0 0; }
+    .dots button { min-height: 0; padding: 0; width: 26px; height: 6px; border-radius: 3px; border: none;
+                   background: color-mix(in srgb, var(--c) 30%, var(--surface)); }
+    .dots button.on { background: var(--c); width: 40px; }
+    .slots {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+      gap: 12px; margin: 12px -16px 0; padding: 0 16px 4px; scrollbar-width: none;
+    }
+    .slots::-webkit-scrollbar { display: none; }
+    .card { flex: 0 0 88%; scroll-snap-align: center; }
+    .hero { height: 230px; }
+    .hero-cover { height: 190px; }
+    .next { flex-direction: column; align-items: stretch; gap: 8px; }
+    .done-btn { width: 100%; font-size: 17px; min-height: 54px; }
+
+    .bottomnav {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      height: calc(var(--nav-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom);
+      background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+    }
+    .bottomnav button {
+      flex: 1; border: none; border-radius: 0; background: none; min-height: 0; padding: 6px 0 4px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      font-size: 11px; color: var(--text-muted);
+    }
+    .bottomnav button span { font-size: 21px; line-height: 1; filter: grayscale(1); opacity: .7; }
+    .bottomnav button.on { color: var(--text-primary); font-weight: 600; }
+    .bottomnav button.on span { filter: none; opacity: 1; }
+    .toast { bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 12px); }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>🎮 Gaming Plan</h1>
-  <p class="sub">One game per slot. Finish (or drop) it before the next one moves up. Every chapter counts.</p>
-  <div class="rules" id="rules"></div>
+<header class="topbar">
+  <div class="brand">🎮 Gaming Plan</div>
+  <div class="tagline">One game per slot. Finish (or drop) it before the next one moves up. Every chapter counts.</div>
+</header>
 
-  <div class="stats" id="stats"></div>
-  <div class="slots" id="slots"></div>
+<main class="wrap">
+  <section class="view" data-view="home">
+    <div class="stats" id="stats"></div>
+    <div class="dots" id="dots" role="tablist" aria-label="Slots"></div>
+    <div class="slots" id="slots"></div>
+  </section>
 
-  <h2>With friends</h2>
-  <div class="friends">Marvel Rivals · Fortnite · Fall Guys · Skate. Social time, no tracking and no guilt.
-    If you catch yourself grinding a battle pass alone, that's your cue to boot up your main game instead.</div>
+  <section class="view" data-view="plan">
+    <h2>📋 Plan</h2>
+    <div class="rules" id="rules"></div>
+    <div class="plan" id="plan"></div>
+    <div class="friends"><b>With friends:</b> Marvel Rivals · Fortnite · Fall Guys · Skate. Social time, no tracking and no guilt.
+      If you catch yourself grinding a battle pass alone, that's your cue to boot up your main game instead.</div>
+  </section>
 
-  <h2>📋 Plan</h2>
-  <div class="plan" id="plan"></div>
+  <section class="view" data-view="shelf">
+    <h2>🏆 Shelf</h2>
+    <div class="shelf" id="shelf"></div>
+  </section>
 
-  <h2>🏆 Shelf</h2>
-  <div class="shelf" id="shelf"></div>
+  <section class="view" data-view="companions">
+    <h2>🧭 Companions</h2>
+    <div class="comp-list" id="companions"></div>
+  </section>
 
-  <h2>💬 Message to Claude</h2>
-  <div class="box msg">
-    <label class="field-label" for="inbox">Requests, ideas, games to add. Anything goes, one per line.</label>
-    <textarea id="inbox" placeholder="e.g. add Hollow Knight, Switch 2&#10;I'm bored of RDR2, swap it for something shorter"></textarea>
-    <div class="msg-actions">
-      <button data-act="copy">📋 Copy for Claude</button>
-      <button data-act="clearmsg">Clear</button>
-      Easiest: just tell Claude "check my tracker". It reads this box and your progress through sync. The copy button is a backup.
+  <section class="view" data-view="message">
+    <h2>💬 Message to Claude</h2>
+    <div class="box msg">
+      <label class="field-label" for="inbox">Requests, ideas, games to add. Anything goes, one per line.</label>
+      <textarea id="inbox" placeholder="e.g. add Hollow Knight, Switch 2&#10;I'm bored of RDR2, swap it for something shorter"></textarea>
+      <div class="msg-actions">
+        <button data-act="copy">📋 Copy for Claude</button>
+        <button data-act="clearmsg">Clear</button>
+        Easiest: just tell Claude "check my tracker". It reads this box and your progress through sync. The copy button is a backup.
+      </div>
     </div>
-  </div>
+    <div class="backup">
+      Backup file:
+      <button id="exportBtn">Download</button>
+      <button id="importBtn">Restore</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+  </section>
+</main>
 
-  <div class="backup">
-    Progress is saved in this browser.
-    <button id="exportBtn">Download backup</button>
-    <button id="importBtn">Restore backup</button>
-    <input type="file" id="importFile" accept="application/json" hidden>
-  </div>
-</div>
+<nav class="bottomnav" aria-label="Sections">
+  <button data-nav="home"><span>🏠</span>Home</button>
+  <button data-nav="plan"><span>📋</span>Plan</button>
+  <button data-nav="shelf"><span>🏆</span>Shelf</button>
+  <button data-nav="companions"><span>🧭</span>Guides</button>
+  <button data-nav="message"><span>💬</span>Claude</button>
+</nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -289,9 +403,17 @@ const activeIn = slot => slot.queue.map(game).find(g => !isOver(g));
 
 // ---------------- Rendering ----------------
 function render() {
+  // Re-rendering replaces the cards, so keep the carousel position and open sections
+  const slotsEl = document.getElementById("slots");
+  const scroll = slotsEl.scrollLeft;
+  const open = [...document.querySelectorAll("details[open][data-g]")].map(d => d.dataset.g);
   renderStats();
   renderSlots();
   renderShelf();
+  renderCompanions();
+  open.forEach(reopen);
+  slotsEl.style.scrollBehavior = "auto"; slotsEl.scrollLeft = scroll; slotsEl.style.scrollBehavior = "";
+  updateDots();
 }
 
 // The plan is static, so it only needs drawing once
@@ -305,6 +427,8 @@ function renderPlan() {
     <div class="box"><h3>Parked backlog</h3>
       ${PARKED.map(([group, games]) => `<h4>${group}</h4><ul>${games.map(g => `<li>${esc(g)}</li>`).join("")}</ul>`).join("")}
     </div>`;
+  document.getElementById("dots").innerHTML = SLOTS.map((s, i) =>
+    `<button style="--c:var(${s.color})" data-dot="${i}" aria-label="${s.name} slot"></button>`).join("");
 }
 
 function renderStats() {
@@ -317,8 +441,8 @@ function renderStats() {
   document.getElementById("stats").innerHTML = [
     tile("Games finished", finished, "every one is a win"),
     tile("Chapters cleared", chapters, "across all games"),
-    tile("Cleared this week", week, week ? "keep the streak going" : "one chapter starts it"),
-    tile("Hours left in plan", "~" + Math.round(totalHours), "main story estimates"),
+    tile("This week", week, week ? "keep the streak going" : "one chapter starts it"),
+    tile("Hours left", "~" + Math.round(totalHours), "main story estimates"),
   ].join("");
 }
 const tile = (label, value, hint) =>
@@ -327,53 +451,63 @@ const tile = (label, value, hint) =>
 function renderSlots() {
   document.getElementById("slots").innerHTML = SLOTS.map(slot => {
     const g = activeIn(slot);
-    const head = `<div class="slot-head"><span class="dot"></span><strong>${slot.name}</strong><span class="moment">${slot.moment}</span></div>`;
-    if (!g) return `<section class="card" style="--c:var(${slot.color})">${head}
+    const badges = `<span class="slot-badge"><span class="dot"></span>${slot.name}</span><span class="moment-badge">${slot.moment}</span>`;
+    if (!g) return `<section class="card" style="--c:var(${slot.color})"><div class="hero">${badges}</div>
       <div class="empty">🎉 Slot cleared!<br><strong>Next by the plan:</strong> ${esc(slot.after)}</div></section>`;
 
     const n = doneCount(g), total = g.steps.length, pct = Math.round(n / total * 100);
     const nextIdx = g.done.indexOf(false);
     const later = slot.queue.map(game).filter(x => !isOver(x) && x.id !== g.id);
+    const src = `covers/${g.id}.jpg`;
 
     return `<section class="card" style="--c:var(${slot.color})">
-      ${head}
-      <div class="game-head">
-        ${cover(g)}
+      <div class="hero">
+        <img class="hero-bg" src="${src}" alt="" onerror="this.remove()">
+        <img class="hero-cover" src="${src}" alt="${esc(g.title)} cover" onerror="this.remove()">
+        ${badges}
+      </div>
+      <div class="body">
         <div>
-          <div class="title-row"><span class="game-title">${esc(g.title)}</span>
+          <div class="game-title">${esc(g.title)}</div>
+          <div class="chips" style="margin-top:6px">
             <span class="chip">${g.platform}</span><span class="chip">~${g.hours}h</span>
-            ${g.companion ? `<a class="chip" href="${g.companion}" style="color:var(--text-primary);text-decoration:none">🧭 Companion</a>` : ""}</div>
-          <div>
-            <div class="meter" role="progressbar" aria-label="${esc(g.title)} progress"
-                 aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${n}" title="${n} of ${total} chapters cleared">
-              <span style="width:${pct}%"></span></div>
-            <div class="meter-label"><span>${n} / ${total} chapters</span><span>${pct}%</span></div>
+            ${g.companion ? `<a class="chip" href="${g.companion}">🧭 Companion</a>` : ""}
           </div>
         </div>
-      </div>
-      ${nextIdx >= 0 ? `<div class="next"><div class="what"><small>Next up</small>${esc(g.steps[nextIdx])}</div>
-        <button class="done-btn" data-act="tick" data-g="${g.id}" data-i="${nextIdx}">✓ Done</button></div>` : ""}
-      <div>
-        <label class="field-label" for="note-${g.id}">Where I left off</label>
-        <textarea id="note-${g.id}" data-note="${g.id}" placeholder="e.g. Just reached the new town, about to do the next story mission">${esc(g.note || "")}</textarea>
-      </div>
-      <details>
-        <summary>All chapters</summary>
-        <ul class="steps">${g.steps.map((st, i) => `
-          <li class="${g.done[i] ? "checked" : ""}">
-            <input type="checkbox" id="${g.id}-${i}" data-act="toggle" data-g="${g.id}" data-i="${i}" ${g.done[i] ? "checked" : ""}>
-            <label for="${g.id}-${i}">${esc(st)}</label>
-            <button class="link-btn" data-act="rename" data-g="${g.id}" data-i="${i}" title="Rename" aria-label="Rename ${esc(st)}">✎</button>
-          </li>`).join("")}</ul>
-        <div class="edit-row">
-          <button data-act="add" data-g="${g.id}">+ chapter</button>
-          <button data-act="remove" data-g="${g.id}">− last</button>
-          ${g.approx ? `<span class="approx">List is approximate: adjust it to match the game, ✎ to rename.</span>` : ""}
+        <div>
+          <div class="meter" role="progressbar" aria-label="${esc(g.title)} progress"
+               aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${n}" title="${n} of ${total} chapters cleared">
+            <span style="width:${pct}%"></span></div>
+          <div class="meter-label"><span>${n} / ${total} chapters</span><span>${pct}%</span></div>
         </div>
-      </details>
-      ${later.length ? `<div class="queue">Up next in this slot:<br>${later.map(x => `<span class="q chip">${esc(x.title)}</span>`).join("")}</div>` : ""}
-      <div class="card-foot">
-        <button data-act="drop" data-g="${g.id}" title="Not enjoying it? Dropping counts as progress">✋ Drop this game</button></div>
+        ${g.note ? `<div class="lastnote">📝 ${esc(g.note)}</div>` : ""}
+        ${nextIdx >= 0 ? `<div class="next"><div class="what"><small>Next up</small><span>${esc(g.steps[nextIdx])}</span></div>
+          <button class="done-btn" data-act="tick" data-g="${g.id}" data-i="${nextIdx}">✓ Done</button></div>` : ""}
+        <details data-g="${g.id}">
+          <summary>📝 Notes & chapters</summary>
+          <div class="details-body">
+            <div>
+              <label class="field-label" for="note-${g.id}">Where I left off</label>
+              <textarea id="note-${g.id}" data-note="${g.id}" placeholder="e.g. Just reached the new town, about to do the next story mission">${esc(g.note || "")}</textarea>
+            </div>
+            <ul class="steps">${g.steps.map((st, i) => `
+              <li class="${g.done[i] ? "checked" : ""}">
+                <input type="checkbox" id="${g.id}-${i}" data-act="toggle" data-g="${g.id}" data-i="${i}" ${g.done[i] ? "checked" : ""}>
+                <label for="${g.id}-${i}">${esc(st)}</label>
+                <button class="link-btn" data-act="rename" data-g="${g.id}" data-i="${i}" title="Rename" aria-label="Rename ${esc(st)}">✎</button>
+              </li>`).join("")}</ul>
+            <div class="edit-row">
+              <button data-act="add" data-g="${g.id}">+ chapter</button>
+              <button data-act="remove" data-g="${g.id}">− last</button>
+              ${g.approx ? `<span class="approx">List is approximate: adjust it to match the game, ✎ to rename.</span>` : ""}
+            </div>
+          </div>
+        </details>
+        <div class="card-foot">
+          <div class="queue">${later.length ? `Then: ${later.map(x => `<span class="chip">${esc(x.title)}</span>`).join("")}` : ""}</div>
+          <button class="drop-btn" data-act="drop" data-g="${g.id}" title="Not enjoying it? Dropping counts as progress">✋ Drop</button>
+        </div>
+      </div>
     </section>`;
   }).join("");
 }
@@ -382,22 +516,53 @@ function renderShelf() {
   const over = Object.keys(GAMES).map(game).filter(isOver)
     .sort((a, b) => (b.finishedAt || b.droppedAt) - (a.finishedAt || a.droppedAt));
   document.getElementById("shelf").innerHTML = over.length
-    ? over.map(g => `<div class="trophy">${cover(g)}<div>
+    ? over.map(g => `<div class="trophy">${thumb(g)}<div>
         <div class="t">${esc(g.title)}</div>
         <div class="d">${g.finishedAt ? `<span class="badge-good">✓ Finished</span>` : "Put down"} · ${new Date(g.finishedAt || g.droppedAt).toLocaleDateString()}</div>
         ${g.rating ? "" : `<div class="ask">How was it?</div>`}
         <div class="rate">${RATINGS.map(([r, label]) =>
           `<button class="${g.rating === r ? "on" : ""}" data-act="rate" data-g="${g.id}" data-r="${r}">${label}</button>`).join("")}</div>
         <button class="link-btn" data-act="undo" data-g="${g.id}">undo</button></div></div>`).join("")
-    : `<div class="empty">Your first finished game will land here. Alan Wake is 8 chapters away.</div>`;
+    : `<div class="empty">Your first finished game will land here.</div>`;
+}
+
+// Every game with a companion page, active games first
+function renderCompanions() {
+  const active = new Set(SLOTS.map(activeIn).filter(Boolean).map(g => g.id));
+  const list = Object.keys(GAMES).map(game).filter(g => g.companion)
+    .sort((a, b) => active.has(b.id) - active.has(a.id));
+  document.getElementById("companions").innerHTML = list.length
+    ? list.map(g => `<div class="comp">${thumb(g)}<div>
+        <div class="t">${esc(g.title)}</div>
+        <div class="d">${active.has(g.id) ? "Playing now" : isOver(g) ? "On the shelf" : "Queued"} · ${g.platform}</div>
+        <a class="chip" href="${g.companion}">Open companion →</a></div></div>`).join("")
+    : `<div class="empty">No companions yet. Ask Claude to make one.</div>`;
 }
 
 const RATINGS = [["liked", "👍 Liked"], ["disliked", "👎 Didn't like"], ["hated", "💀 Hated"]];
 
 // Box art lives in covers/<id>.jpg; the image just disappears if the file is missing
-const cover = g => `<img class="cover" src="covers/${g.id}.jpg" alt="" onerror="this.remove()">`;
+const thumb = g => `<img class="thumb" src="covers/${g.id}.jpg" alt="" onerror="this.remove()">`;
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---------------- Navigation (phones) + carousel dots ----------------
+function showView(name) {
+  const views = [...document.querySelectorAll(".view")].map(v => v.dataset.view);
+  if (!views.includes(name)) name = "home";
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.dataset.view === name));
+  document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("on", b.dataset.nav === name));
+}
+window.addEventListener("hashchange", () => { showView(location.hash.slice(1)); window.scrollTo(0, 0); });
+
+function updateDots() {
+  const el = document.getElementById("slots");
+  const card = el.querySelector(".card");
+  if (!card) return;
+  const idx = Math.round(el.scrollLeft / (card.offsetWidth + 12));
+  document.querySelectorAll("[data-dot]").forEach(d => d.classList.toggle("on", +d.dataset.dot === idx));
+}
+document.getElementById("slots").addEventListener("scroll", () => requestAnimationFrame(updateDots), { passive: true });
 
 // ---------------- Actions ----------------
 function setDone(id, i, value) {
@@ -422,6 +587,10 @@ function setDone(id, i, value) {
 }
 
 document.addEventListener("click", e => {
+  const nav = e.target.closest("[data-nav]");
+  if (nav) { location.hash = nav.dataset.nav; return; }
+  const dot = e.target.closest("[data-dot]");
+  if (dot) { document.querySelectorAll("#slots .card")[+dot.dataset.dot]?.scrollIntoView({ inline: "center", block: "nearest" }); return; }
   const el = e.target.closest("[data-act]");
   if (!el) return;
   const { act, g: id } = el.dataset, i = +el.dataset.i;
@@ -437,7 +606,7 @@ document.addEventListener("click", e => {
     const s = game(id).s;
     s.rating = s.rating === el.dataset.r ? undefined : el.dataset.r; // click again to clear
     save(); render();
-    if (s.rating) toast("Rating saved. Send it to Claude below to update your queue.");
+    if (s.rating) toast("Rating saved. Claude will use it next time you say \"check my tracker\".");
   }
   if (act === "copy") copyForClaude();
   if (act === "clearmsg") { state.inbox = ""; save(); document.getElementById("inbox").value = ""; }
@@ -479,8 +648,8 @@ function fallbackCopy(text, done) {
   document.execCommand("copy"); t.remove(); done();
 }
 
-function reopen(id) { // keep the chapter list open after editing
-  document.querySelector(`[data-g="${id}"][data-act="add"]`)?.closest("details")?.setAttribute("open", "");
+function reopen(id) { // keep a game's notes & chapters section open after re-rendering
+  document.querySelector(`details[data-g="${id}"]`)?.setAttribute("open", "");
 }
 
 let toastTimer;
@@ -520,6 +689,7 @@ document.getElementById("importFile").onchange = async e => {
 
 renderPlan();
 render();
+showView(location.hash.slice(1));
 document.getElementById("inbox").value = state.inbox || "";
 </script>
 </body>
