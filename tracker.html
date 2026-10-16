@@ -70,6 +70,15 @@
   .tile .hint { color: var(--text-muted); font-size: 12px; }
   .tile .short { display: none; }
 
+  /* ---- Banners (almost there / release day) ---- */
+  .banner { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 12px 14px; border-radius: 14px;
+            background: color-mix(in srgb, var(--c) 14%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); }
+  .banner .icon { font-size: 26px; line-height: 1; }
+  .banner .text { flex: 1; min-width: 0; font-size: 14px; color: var(--text-secondary); }
+  .banner .text b { color: var(--text-primary); }
+  .banner button { min-height: 36px; padding: 4px 12px; font-size: 13px; white-space: nowrap; }
+  .want { font-size: 11px; border-radius: 999px; padding: 1px 8px; background: var(--surface-2); color: var(--text-secondary); white-space: nowrap; }
+
   /* ---- Slot cards (launcher style) ---- */
   .dots { display: none; }
   .slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px; }
@@ -268,6 +277,7 @@
 <main class="wrap">
   <section class="view" data-view="home">
     <div class="stats" id="stats"></div>
+    <div id="banners"></div>
     <div class="dots" id="dots" role="tablist" aria-label="Slots"></div>
     <div class="slots" id="slots"></div>
   </section>
@@ -370,13 +380,21 @@ const RULES = [
 ];
 
 const PARKED = [
-  ["Coming soon", ["GTA 6 · PS5 · Nov 19, 2026 (top priority, takes the Epic slot on release)"]],
   ["Series, in order", ["Metal Gear Solid 2 → 3 → 4 · PS5", "Zelda BotW → TotK · Switch 2 (uses the Epic slot)", "Resident Evil 5 → 6 · PS5"]],
   ["Short (under 15h)", ["Signalis", "Sonic X Shadow Generations", "Mario Odyssey · Switch 2"]],
   ["Medium", ["Disco Elysium · PC", "The Last of Us Part II", "Final Fantasy XVI"]],
   ["Epic (40h+)", ["The Witcher 3", "Elden Ring", "Like a Dragon"]],
   ["Snack pool · PS5", ["The Binding of Isaac", "Slay the Spire", "Stardew Valley"]],
   ["Paused", ["Bleach: Rebirth of Souls"]],
+];
+
+// Coming soon: countdown in Plan; from release day on, Home shows a banner until Claude sets the game up
+const RELEASES = [
+  { title: "GTA 6", platform: "PS5", date: "2026-11-19", note: "Top priority, takes the Epic slot" },
+];
+
+// Wishlist: games to buy and/or play later. want: "buy" (don't own it yet) or "play" (owned, not in the plan yet)
+const WISHLIST = [
 ];
 // ================================================================
 
@@ -412,6 +430,7 @@ function render() {
   const scroll = slotsEl.scrollLeft;
   const open = [...document.querySelectorAll("details[open][data-g]")].map(d => d.dataset.g);
   renderStats();
+  renderBanners();
   renderSlots();
   renderShelf();
   renderCompanions();
@@ -428,6 +447,13 @@ function renderPlan() {
     <div class="box"><h3>When a slot frees up</h3><ul>
       ${SLOTS.map(s => `<li style="--c:var(${s.color})"><span class="dot"></span><b>${s.name}</b><span>${esc(s.after)}</span></li>`).join("")}
     </ul></div>
+    <div class="box"><h3>🎉 Coming soon</h3>${RELEASES.length ? `<ul>${RELEASES.map(r => {
+        const days = daysUntil(r.date);
+        return `<li><b>${esc(r.title)}</b><span>${esc(r.platform)} · ${days > 0 ? `in ${days} day${days === 1 ? "" : "s"}` : "out now!"}${r.note ? ` · ${esc(r.note)}` : ""}</span></li>`;
+      }).join("")}</ul>` : `<div class="empty">Nothing announced that you're waiting for.</div>`}</div>
+    <div class="box"><h3>🛍 Wishlist</h3>${WISHLIST.length ? `<ul>${WISHLIST.map(w =>
+        `<li><span class="want">${w.want === "play" ? "🎮 To play" : "🛒 To buy"}</span><span><b>${esc(w.title)}</b>${w.platform ? ` · ${esc(w.platform)}` : ""}${w.note ? ` · ${esc(w.note)}` : ""}</span></li>`).join("")}</ul>`
+      : `<div class="empty">Empty. Write "wishlist: &lt;game&gt;, &lt;platform&gt;" in the message box and Claude adds it.</div>`}</div>
     <div class="box"><h3>Parked backlog</h3>
       ${PARKED.map(([group, games]) => `<h4>${group}</h4><ul>${games.map(g => `<li>${esc(g)}</li>`).join("")}</ul>`).join("")}
     </div>`;
@@ -449,6 +475,23 @@ function renderStats() {
     tile("Hours left", "~" + Math.round(totalHours), "main story estimates"),
   ].join("");
 }
+// Days from today until a "YYYY-MM-DD" date (0 or less = released)
+const daysUntil = date => Math.ceil((new Date(date + "T00:00") - new Date()) / 864e5);
+
+// Release-day alerts + the active game closest to its finish line
+function renderBanners() {
+  const out = RELEASES.filter(r => daysUntil(r.date) <= 0).map(r => `<div class="banner" style="--c:var(--s2)">
+    <span class="icon">🎉</span><div class="text"><b>${esc(r.title)} is out!</b> Tell Claude "${esc(r.title)} is out" to set it up.</div></div>`);
+  const best = SLOTS.map((slot, i) => ({ slot, i, g: activeIn(slot) }))
+    .filter(x => x.g && doneCount(x.g) > 0)
+    .map(x => ({ ...x, left: x.g.steps.length - doneCount(x.g), pct: doneCount(x.g) / x.g.steps.length }))
+    .sort((a, b) => b.pct - a.pct || a.left - b.left)[0];
+  if (best) out.push(`<div class="banner" style="--c:var(${best.slot.color})">
+    <span class="icon">🏁</span><div class="text">Almost there: <b>${esc(best.g.title)}</b>, ${best.left} to go · ${Math.round(best.pct * 100)}% done</div>
+    <button data-dot="${best.i}" data-goto="1">Show</button></div>`);
+  document.getElementById("banners").innerHTML = out.join("");
+}
+
 const tile = (label, value, hint, short = label) =>
   `<div class="tile"><div class="label"><span class="long">${label}</span><span class="short">${short}</span></div><div class="value">${value}</div><div class="hint">${hint}</div></div>`;
 
@@ -566,7 +609,7 @@ function updateDots() {
   const card = el.querySelector(".card");
   if (!card) return;
   const idx = Math.round(el.scrollLeft / (card.offsetWidth + 12));
-  document.querySelectorAll("[data-dot]").forEach(d => d.classList.toggle("on", +d.dataset.dot === idx));
+  document.querySelectorAll("#dots [data-dot]").forEach(d => d.classList.toggle("on", +d.dataset.dot === idx));
 }
 document.getElementById("slots").addEventListener("scroll", () => requestAnimationFrame(updateDots), { passive: true });
 
