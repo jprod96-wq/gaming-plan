@@ -41,6 +41,7 @@ Personal dashboard to finish games instead of growing the backlog.
 - After editing files, publish with `git add -A && git commit -m "..." && git push` (Pages updates in ~1 min).
 
 ## Decisions
+- **Phone first.** The user mostly uses the phone version. Page changes follow the "Phone check" in the game-companion skill (no page-widening grids, no jumping lists, Undo on hiding taps).
 - **Max 4 active games**, one per slot, each tied to a moment (TV evening / chill TV / in bed / 20 min). Friends' online games aren't tracked.
 - **Ratings** are Liked / Didn't like / Hated, used to reprioritise queues (e.g. hated a game → its sequel gets parked).
 - **No "last played" indicator.** The user can take a long time per chapter, so it would nag unfairly.
@@ -65,3 +66,4 @@ Personal dashboard to finish games instead of growing the backlog.
 - 2026-10-16: Wishlist + Control Resonant, Indiana Jones (both to buy, PS5). Plan tab redesign: rule tiles, per-slot Roadmap (now → queue → after, with covers + progress), Coming soon countdown cards, wishlist cover cards, parked backlog as chips. RELEASES/WISHLIST items take an optional `id` for covers/<id>.jpg (gta6, indiana, control-resonant added).
 - 2026-10-19: DMC 5 Special Edition (PS5) → parked "Short (under 15h)" (Someday), from the message box.
 - 2026-10-19: Phone fix: Plan tab no longer stretches sideways (roadmap/rules/plan grids use minmax(0,…)/min(…,100%) so cover strips scroll inside their row). RDR2 Hunt list + companion shopping list sorted alphabetically (cards used to jump when a material was ticked, looking like both were removed); RDR2 "Got it" toast has Undo, "Got 1" when qty > 1.
+- 2026-10-19: game-companion skill: "Phone check" section for any page-code change. Phone-first added to Decisions.
