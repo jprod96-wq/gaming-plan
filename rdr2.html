@@ -83,7 +83,8 @@
   .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--surface);
            border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; opacity: 0;
            transition: opacity .2s; pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
-  .toast.show { opacity: 1; }
+  .toast.show { opacity: 1; pointer-events: auto; }
+  .toast button { min-height: 0; padding: 2px 10px; margin-left: 4px; font-weight: 600; }
 
   /* ---- Phones ---- */
   @media (max-width: 760px) {
@@ -200,7 +201,7 @@ function viewHunt() {
   }));
   const list = Object.values(groups)
     .filter(g => matches(g.animal, ...Object.values(g.needs).flatMap(n => [n.item, ...n.for])))
-    .sort((a, b) => Object.keys(b.needs).length - Object.keys(a.needs).length || a.animal.localeCompare(b.animal));
+    .sort((a, b) => a.animal.localeCompare(b.animal)); // alphabetical, so cards don't jump when a material is ticked off
 
   const intro = anyWanted
     ? `Showing materials for your ☆ starred items only. Unstar everything to see the full list.`
@@ -216,7 +217,7 @@ function viewHunt() {
       <div style="margin-top:8px">${Object.values(g.needs).map(n => `
         <div class="need"><div class="what"><span class="qty">${n.qty}×</span> ${esc(n.item)}
           <div class="sub">for ${esc([...new Set(n.for)].join(", "))}</div></div>
-          <button data-act="gotone" data-ref="${n.refs[0]}">✓ Got it</button></div>`).join("")}
+          <button data-act="gotone" data-ref="${n.refs[0]}">${n.qty > 1 ? "✓ Got 1" : "✓ Got it"}</button></div>`).join("")}
       </div></div>`;
   }).join("")}</div>`;
 }
@@ -305,7 +306,8 @@ document.addEventListener("click", e => {
     S.done[key] = !S.done[key];
     if (S.done[key]) toast(key.startsWith("ledger") ? "Upgrade bought ✓" : "Crafted! ✓");
   }
-  if (act === "gotone") { S.got[ref] = true; toast("Got it ✓"); }
+  if (act === "gotone") { S.got[ref] = true; toast("Got it ✓", ref); }
+  if (act === "undo") { delete S.got[ref]; toast("Undone"); }
   if (act === "got") S.got[ref] = el.checked;
   if (act === "leg") {
     const st = S.leg[el.dataset.id] ||= {};
@@ -318,10 +320,12 @@ document.addEventListener("click", e => {
 document.getElementById("search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); render(); });
 
 let toastTimer;
-function toast(msg) {
+// undoRef: material key to un-tick, shows an Undo button and keeps the toast up longer
+function toast(msg, undoRef) {
   const t = document.getElementById("toast");
-  t.textContent = msg; t.classList.add("show");
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+  t.innerHTML = esc(msg) + (undoRef ? ` · <button data-act="undo" data-ref="${undoRef}">Undo</button>` : "");
+  t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), undoRef ? 4000 : 1800);
 }
 
 if (typeof RDR2 === "undefined") {

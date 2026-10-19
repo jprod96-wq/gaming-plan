@@ -215,7 +215,7 @@ function viewShop() {
   }));
   const list = Object.values(groups)
     .filter(g => matches(g.source, Object.values(g.needs).flatMap(n => [n.item, ...n.for])))
-    .sort((a, b) => Object.keys(b.needs).length - Object.keys(a.needs).length || a.source.localeCompare(b.source));
+    .sort((a, b) => a.source.localeCompare(b.source)); // alphabetical, so cards don't jump when a material is ticked off
   const intro = anyWanted ? "Showing materials for your ☆ starred items. Unstar everything to reset."
                           : "☆ Star items in the other tabs to build your shopping list.";
   if (!list.length) return `<p class="hint">${intro}</p><div class="empty">${query ? "Nothing matches your search." : anyWanted ? "🎉 You have everything for your starred items!" : "Nothing here yet. Star something you want to make."}</div>`;

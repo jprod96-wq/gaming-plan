@@ -161,15 +161,15 @@
 
   /* ---- Plan, friends, shelf, companions, message ---- */
   .sec { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); font-weight: 600; margin: 22px 0 10px; }
-  .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .rules { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
   .rule { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; display: flex; gap: 10px; }
   .rule .ico { font-size: 20px; line-height: 1.2; }
   .rule b { display: block; font-size: 14px; font-weight: 600; }
   .rule .txt { font-size: 12.5px; color: var(--text-secondary); }
 
   /* Roadmap: one row per slot, now → queue → after */
-  .roadmap { display: grid; gap: 10px; }
-  .road { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--c); border-radius: 14px; padding: 12px 14px; }
+  .roadmap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; } /* minmax(0): rows scroll inside, never widen the page */
+  .road { min-width: 0; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--c); border-radius: 14px; padding: 12px 14px; }
   .road-head { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 10px; }
   .road-head .m { color: var(--text-muted); font-size: 12.5px; }
   .road-track { display: flex; align-items: center; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px; }
@@ -187,7 +187,7 @@
   .cov img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
   /* Coming soon + wishlist cards, parked chips */
-  .plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-top: 12px; }
+  .plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 12px; margin-top: 12px; }
   .item { display: flex; gap: 12px; align-items: center; padding: 8px 0; }
   .item + .item { border-top: 1px solid var(--hairline); }
   .item .cov { width: 52px; flex: none; }
@@ -199,7 +199,7 @@
   .count b { display: block; font-size: 30px; line-height: 1; font-weight: 700; }
   .count span { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
   .parked { grid-column: 1 / -1; }
-  .park-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 22px; }
+  .park-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 14px 22px; }
   .park-grid h4 { margin: 0 0 6px !important; }
   .pchips { display: flex; flex-wrap: wrap; gap: 6px; }
   .pchip { font-size: 12.5px; background: var(--surface-2); border-radius: 999px; padding: 3px 10px; color: var(--text-secondary); }
@@ -272,7 +272,7 @@
     .tile .hint, .tile .long { display: none; }
     .tile .short { display: inline; }
 
-    .rules { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .rules { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     .rule { padding: 10px 12px; }
 
     /* Swipeable slot carousel with a peek of the next card */
