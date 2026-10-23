@@ -296,6 +296,7 @@
 <script>
 // ===================== PLAN DATA (edit here) =====================
 // Chapters: give `steps` (names) or `chapters` (a count, becomes "Chapter 1…N"). approx: true = list not verified, adjust in the page with + / − / ✎.
+// genre: 1-2 tags (sci-fi, fantasy, horror, crime, literary, classic, mythology, comedy, memoir, non-fiction, comics…), used for recommendations.
 // startDone: chapters already read when the book was added (used only until you save your own progress).
 // url: website of the book. links: one URL per step (shown as "Open chapter" under Next up).
 // Covers: covers/b-<id>.jpg (a title block shows if missing). NEVER rename a book id: progress is keyed by id.
@@ -315,28 +316,28 @@ const DISCWORLD = ["The Light Fantastic", "Equal Rites", "Mort", "Sourcery", "Wy
   "I Shall Wear Midnight", "Snuff", "Raising Steam", "The Shepherd's Crown"];
 
 const BOOKS = {
-  continuity:   { title: "Marvel Continuity Guide", author: "Marvel Modern era · continuityguide.net", pages: 0, format: "ebook", url: GUIDE + "marvel-modern",
+  continuity:   { title: "Marvel Continuity Guide", author: "Marvel Modern era · continuityguide.net", pages: 0, format: "ebook", genre: ["comics"], url: GUIDE + "marvel-modern",
                   steps: GUIDE_MODERN.map(c => c[0]), links: GUIDE_MODERN.map(c => GUIDE + c[1]), startDone: 1 },
-  spiral:       { title: "Spiral (The Ring #2)", author: "Koji Suzuki", pages: 304, format: "paper", chapters: 20, approx: true, startDone: 5 },
-  dcc2:         { title: "Dungeon Crawler Carl #2: Carl's Doomsday Scenario", author: "Matt Dinniman", pages: 448, format: "paper", chapters: 30, approx: true },
-  ozzy:         { title: "Last Rites", author: "Ozzy Osbourne", pages: 0, format: "paper", chapters: 20, approx: true },
-  betty:        { title: "Betty", author: "Tiffany McDaniel", pages: 480, format: "paper", chapters: 32, approx: true },
-  threebody:    { title: "The Three-Body Problem", author: "Liu Cixin", pages: 400, format: "paper", chapters: 27, approx: true },
-  ivan:         { title: "The Death of Ivan Ilyich", author: "Leo Tolstoy", pages: 86, format: "paper", chapters: 12, approx: true },
-  phm:          { title: "Project Hail Mary", author: "Andy Weir", pages: 476, format: "paper", chapters: 33, approx: true },
-  hhgttg:       { title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams", pages: 224, format: "paper", chapters: 35, approx: true },
-  godemperor:   { title: "God Emperor of Dune", author: "Frank Herbert", pages: 450, format: "paper", chapters: 30, approx: true },
-  heretics:     { title: "Heretics of Dune", author: "Frank Herbert", pages: 480, format: "paper", chapters: 32, approx: true },
-  chapterhouse: { title: "Chapterhouse: Dune", author: "Frank Herbert", pages: 464, format: "paper", chapters: 31, approx: true },
-  discworld:    { title: "Discworld: the complete collection (from book 2)", author: "Terry Pratchett", pages: 0, format: "paper", steps: DISCWORLD },
-  sober:        { title: "Sober Living for the Revolution", author: "Gabriel Kuhn", pages: 400, format: "paper", chapters: 27, approx: true },
-  smallthings:  { title: "The God of Small Things", author: "Arundhati Roy", pages: 340, format: "paper", chapters: 18, approx: true },
-  mill1:        { title: "Millennium #1: The Girl with the Dragon Tattoo", author: "Stieg Larsson", pages: 465, format: "paper", chapters: 31, approx: true },
-  mill2:        { title: "Millennium #2: The Girl Who Played with Fire", author: "Stieg Larsson", pages: 503, format: "paper", chapters: 34, approx: true },
-  mill3:        { title: "Millennium #3: The Girl Who Kicked the Hornets' Nest", author: "Stieg Larsson", pages: 563, format: "paper", chapters: 38, approx: true },
-  passion:      { title: "The Passion Trilogy", author: "Ariana Harwicz", pages: 0, format: "paper", steps: ["Die, My Love", "Feebleminded", "Precocious"] },
-  achilles:     { title: "The Song of Achilles", author: "Madeline Miller", pages: 352, format: "paper", chapters: 32, approx: true },
-  circe:        { title: "Circe", author: "Madeline Miller", pages: 400, format: "paper", chapters: 38, approx: true },
+  spiral:       { title: "Spiral (The Ring #2)", author: "Koji Suzuki", pages: 304, format: "paper", genre: ["horror"], chapters: 20, approx: true, startDone: 5 },
+  dcc2:         { title: "Dungeon Crawler Carl #2: Carl's Doomsday Scenario", author: "Matt Dinniman", pages: 448, format: "paper", genre: ["sci-fi", "comedy"], chapters: 30, approx: true },
+  ozzy:         { title: "Last Rites", author: "Ozzy Osbourne", pages: 0, format: "paper", genre: ["memoir"], chapters: 20, approx: true },
+  betty:        { title: "Betty", author: "Tiffany McDaniel", pages: 480, format: "paper", genre: ["literary"], chapters: 32, approx: true },
+  threebody:    { title: "The Three-Body Problem", author: "Liu Cixin", pages: 400, format: "paper", genre: ["sci-fi"], chapters: 27, approx: true },
+  ivan:         { title: "The Death of Ivan Ilyich", author: "Leo Tolstoy", pages: 86, format: "paper", genre: ["classic", "literary"], chapters: 12, approx: true },
+  phm:          { title: "Project Hail Mary", author: "Andy Weir", pages: 476, format: "paper", genre: ["sci-fi"], chapters: 33, approx: true },
+  hhgttg:       { title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams", pages: 224, format: "paper", genre: ["sci-fi", "comedy"], chapters: 35, approx: true },
+  godemperor:   { title: "God Emperor of Dune", author: "Frank Herbert", pages: 450, format: "paper", genre: ["sci-fi"], chapters: 30, approx: true },
+  heretics:     { title: "Heretics of Dune", author: "Frank Herbert", pages: 480, format: "paper", genre: ["sci-fi"], chapters: 32, approx: true },
+  chapterhouse: { title: "Chapterhouse: Dune", author: "Frank Herbert", pages: 464, format: "paper", genre: ["sci-fi"], chapters: 31, approx: true },
+  discworld:    { title: "Discworld: the complete collection (from book 2)", author: "Terry Pratchett", pages: 0, format: "paper", genre: ["fantasy", "comedy"], steps: DISCWORLD },
+  sober:        { title: "Sober Living for the Revolution", author: "Gabriel Kuhn", pages: 400, format: "paper", genre: ["non-fiction", "music"], chapters: 27, approx: true },
+  smallthings:  { title: "The God of Small Things", author: "Arundhati Roy", pages: 340, format: "paper", genre: ["literary"], chapters: 18, approx: true },
+  mill1:        { title: "Millennium #1: The Girl with the Dragon Tattoo", author: "Stieg Larsson", pages: 465, format: "paper", genre: ["crime"], chapters: 31, approx: true },
+  mill2:        { title: "Millennium #2: The Girl Who Played with Fire", author: "Stieg Larsson", pages: 503, format: "paper", genre: ["crime"], chapters: 34, approx: true },
+  mill3:        { title: "Millennium #3: The Girl Who Kicked the Hornets' Nest", author: "Stieg Larsson", pages: 563, format: "paper", genre: ["crime"], chapters: 38, approx: true },
+  passion:      { title: "The Passion Trilogy", author: "Ariana Harwicz", pages: 0, format: "paper", genre: ["literary"], steps: ["Die, My Love", "Feebleminded", "Precocious"] },
+  achilles:     { title: "The Song of Achilles", author: "Madeline Miller", pages: 352, format: "paper", genre: ["mythology", "literary"], chapters: 32, approx: true },
+  circe:        { title: "Circe", author: "Madeline Miller", pages: 400, format: "paper", genre: ["mythology", "literary"], chapters: 38, approx: true },
 };
 
 // The first unfinished book of each queue is the active one.
@@ -471,6 +472,7 @@ function renderSlots() {
           <div class="chips" style="margin-top:6px">
             ${b.format ? `<span class="chip">${FORMAT[b.format] || esc(b.format)}</span>` : ""}
             ${b.pages ? `<span class="chip">${b.pages} pages</span>` : ""}
+            ${(b.genre || []).map(g => `<span class="chip">${esc(g)}</span>`).join("")}
             ${b.url ? `<a class="chip" href="${esc(b.url)}" target="_blank" rel="noopener">🔗 Website</a>` : ""}
           </div>
         </div>
