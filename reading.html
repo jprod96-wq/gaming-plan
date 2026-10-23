@@ -49,6 +49,13 @@
   .tile .hint { color: var(--text-muted); font-size: 12px; }
   .tile .short { display: none; }
 
+  .banner { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 12px 14px; border-radius: 14px;
+            background: color-mix(in srgb, var(--c) 14%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); }
+  .banner .icon { font-size: 26px; line-height: 1; }
+  .banner .text { flex: 1; min-width: 0; font-size: 14px; color: var(--text-secondary); }
+  .banner .text b { color: var(--text-primary); }
+  .banner button { min-height: 36px; padding: 4px 12px; font-size: 13px; white-space: nowrap; }
+
   .dots { display: none; }
   .slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
@@ -239,6 +246,7 @@
 <main class="wrap">
   <section class="view" data-view="home">
     <div class="stats" id="stats"></div>
+    <div id="banners"></div>
     <div class="dots" id="dots" role="tablist" aria-label="Slots"></div>
     <div class="slots" id="slots"></div>
   </section>
@@ -402,17 +410,21 @@ function render() {
   const slotsEl = document.getElementById("slots");
   const scroll = slotsEl.scrollLeft;
   const open = [...document.querySelectorAll("details[open][data-g]")].map(d => d.dataset.g);
-  renderStats(); renderSlots(); renderShelf(); renderRoadmap(); saveSummary();
+  renderStats(); renderBanners(); renderSlots(); renderShelf(); renderRoadmap();
   open.forEach(reopen);
   slotsEl.style.scrollBehavior = "auto"; slotsEl.scrollLeft = scroll; slotsEl.style.scrollBehavior = "";
   updateDots();
 }
 
-// Small summary of the active books, read by the 📚 banner on the games page (synced like the rest)
-function saveSummary() {
-  const sum = JSON.stringify(SLOTS.map(s => ({ s, b: activeIn(s) })).filter(x => x.b)
-    .map(x => ({ title: x.b.title, pct: pctOf(x.b), slot: x.s.name, color: `var(${x.s.color})` })));
-  if (localStorage.getItem("readingTracker.summary") !== sum) localStorage.setItem("readingTracker.summary", sum);
+// "Almost there": the active book with the highest %, with a button that jumps to its card
+function renderBanners() {
+  const best = SLOTS.map((slot, i) => ({ slot, i, b: activeIn(slot) }))
+    .filter(x => x.b && doneCount(x.b) > 0)
+    .map(x => ({ ...x, left: x.b.steps.length - doneCount(x.b), pct: doneCount(x.b) / x.b.steps.length }))
+    .sort((a, b) => b.pct - a.pct || a.left - b.left)[0];
+  document.getElementById("banners").innerHTML = best ? `<div class="banner" style="--c:var(${best.slot.color})">
+    <span class="icon">🏁</span><div class="text">Almost there: <b>${esc(best.b.title)}</b>, ${best.left} to go · ${Math.round(best.pct * 100)}% done</div>
+    <button data-dot="${best.i}">Show</button></div>` : "";
 }
 
 const tile = (label, value, hint, short = label) =>

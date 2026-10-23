@@ -560,13 +560,6 @@ function renderBanners() {
   if (best) out.push(`<div class="banner" style="--c:var(${best.slot.color})">
     <span class="icon">🏁</span><div class="text">Almost there: <b>${esc(best.g.title)}</b>, ${best.left} to go · ${Math.round(best.pct * 100)}% done</div>
     <button data-dot="${best.i}" data-goto="1">Show</button></div>`);
-  // 📚 Reading banner: the active book closest to the finish line (summary is written by reading.html)
-  let books = [];
-  try { books = JSON.parse(localStorage.getItem("readingTracker.summary")) || []; } catch {}
-  const bk = books.filter(b => b.pct > 0 && b.pct < 100).sort((a, b) => b.pct - a.pct)[0] || (books.length ? books[0] : null);
-  if (bk) out.push(`<div class="banner" style="--c:${esc(bk.color)}">
-    <span class="icon">📚</span><div class="text">Reading: <b>${esc(bk.title)}</b> · ${bk.pct}% done${books.length > 1 ? ` · +${books.length - 1} more` : ""}</div>
-    <button onclick="location.href='reading.html'">Open</button></div>`);
   document.getElementById("banners").innerHTML = out.join("");
 }
 
