@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="sync.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Reading Plan</title>
+<style>
+  /* Same colour roles as tracker.html (dataviz reference palette) */
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --surface-2: #222220;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --hairline: #2c2c2a; --border: rgba(255,255,255,0.10); --good: #0ca30c;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --nav-h: 64px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --page: #f9f9f7; --surface: #fcfcfb; --surface-2: #f0efec;
+      --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+      --hairline: #e1e0d9; --border: rgba(11,11,11,0.10); --good: #006300;
+      --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--page); color: var(--text-primary); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 64px; }
+  h2 { font-size: 18px; margin: 32px 0 12px; }
+  button, .btn {
+    font: inherit; cursor: pointer; border-radius: 10px; border: 1px solid var(--border);
+    background: transparent; color: var(--text-primary); padding: 8px 14px; min-height: 40px;
+    text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+  }
+  button:hover { background: var(--hairline); }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+  .topbar { max-width: 1100px; margin: 0 auto; padding: 28px 24px 8px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+  .brand { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
+  .tagline { color: var(--text-secondary); margin-top: 2px; }
+  .muted { color: var(--text-muted); }
+
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .tile .label { color: var(--text-secondary); font-size: 13px; }
+  .tile .value { font-size: 30px; font-weight: 700; margin-top: 2px; }
+
+  .slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+  .hero { position: relative; height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+          background: linear-gradient(160deg, color-mix(in srgb, var(--c) 45%, var(--surface)), var(--surface)); }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, var(--surface)); }
+  .hero img { position: relative; z-index: 1; height: 160px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 8px; box-shadow: 0 12px 32px rgba(0,0,0,.55); }
+  .hero .ph { position: relative; z-index: 1; height: 160px; aspect-ratio: 2 / 3; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+              text-align: center; padding: 10px; font-weight: 700; background: color-mix(in srgb, var(--c) 35%, var(--surface-2)); }
+  .badge { position: absolute; z-index: 2; top: 12px; left: 12px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+           background: rgba(0,0,0,.55); color: #f0efec; border-radius: 999px; padding: 4px 10px; display: flex; align-items: center; gap: 6px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
+  .body { padding: 4px 18px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .book-title { font-size: 21px; font-weight: 700; line-height: 1.2; }
+  .author { color: var(--text-secondary); }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { font-size: 12px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; }
+
+  .bar { height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--c); border-radius: 999px; transition: width .2s; }
+  .pct { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); }
+  .pages { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .pages input[type=number] { width: 84px; font: inherit; padding: 8px; min-height: 40px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary); }
+  .pages button { padding: 8px 12px; }
+  textarea { width: 100%; font: inherit; padding: 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary); resize: vertical; min-height: 60px; }
+  .field-label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .finish { background: var(--good); color: #fff; border-color: transparent; font-weight: 600; flex: 1; }
+  .finish:hover { background: var(--good); filter: brightness(1.1); }
+  .rate { display: flex; gap: 6px; flex-wrap: wrap; }
+  .rate button.on { background: var(--hairline); border-color: var(--text-secondary); font-weight: 600; }
+
+  .box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .empty { color: var(--text-secondary); padding: 24px; text-align: center; border: 1px dashed var(--border); border-radius: 14px; }
+  .list { display: grid; gap: 10px; }
+  .row { display: flex; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; }
+  .row .num { color: var(--text-muted); width: 24px; text-align: right; flex: none; }
+  .row .info { flex: 1; min-width: 0; }
+  .row .info b { display: block; overflow-wrap: anywhere; }
+  .row .mini { width: 36px; height: 54px; border-radius: 5px; object-fit: cover; background: var(--surface-2); flex: none; }
+  .row button { min-height: 36px; padding: 4px 10px; font-size: 13px; }
+  .msg-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; color: var(--text-secondary); font-size: 13px; }
+  .backup { margin-top: 24px; color: var(--text-secondary); font-size: 13px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 30;
+           background: var(--surface-2); border: 1px solid var(--border); padding: 10px 16px; border-radius: 12px; transition: .2s; }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+
+  .view { display: none; }
+  .view.on { display: block; }
+  .bottomnav { display: none; }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 14px calc(var(--nav-h) + env(safe-area-inset-bottom) + 32px); }
+    .topbar { padding: 20px 14px 4px; }
+    .brand { font-size: 22px; }
+    .tagline { display: none; }
+    .slots { grid-template-columns: minmax(0, 1fr); }
+    .stats .value { font-size: 24px; }
+    .finish { min-height: 54px; font-size: 17px; }
+    .bottomnav {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      height: calc(var(--nav-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom);
+      background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(12px); border-top: 1px solid var(--border);
+    }
+    .bottomnav button, .bottomnav a {
+      flex: 1; border: none; border-radius: 0; background: none; min-height: 0; padding: 6px 0 4px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      font-size: 11px; color: var(--text-muted); text-decoration: none;
+    }
+    .bottomnav span { font-size: 21px; line-height: 1; filter: grayscale(1); opacity: .7; }
+    .bottomnav .on { color: var(--text-primary); font-weight: 600; }
+    .bottomnav .on span { filter: none; opacity: 1; }
+    .toast { bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 12px); }
+  }
+  @media (min-width: 721px) {
+    .desk-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 0; }
+  }
+  @media (max-width: 720px) { .desk-nav { display: none; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">📚 Reading Plan</div>
+    <div class="tagline">A couple of books at a time. Finish (or drop) one before the next moves up.</div>
+  </div>
+  <a class="btn" href="tracker.html">🎮 Games</a>
+</header>
+
+<main class="wrap">
+  <div class="desk-nav" id="deskNav"></div>
+
+  <section class="view" data-view="home">
+    <div class="stats" id="stats"></div>
+    <div class="slots" id="slots"></div>
+  </section>
+
+  <section class="view" data-view="queue">
+    <h2>📋 Up next</h2>
+    <div class="list" id="queue"></div>
+    <h2>🗂 Someday</h2>
+    <div class="list" id="someday"></div>
+  </section>
+
+  <section class="view" data-view="shelf">
+    <h2>🏆 Shelf</h2>
+    <div class="list" id="shelf"></div>
+  </section>
+
+  <section class="view" data-view="message">
+    <h2>💬 Message to Claude</h2>
+    <div class="box">
+      <label class="field-label" for="inbox">Requests, books to add, ideas. Anything goes, one per line.</label>
+      <textarea id="inbox" placeholder="e.g. add Project Hail Mary, audiobook&#10;I'm bored of this one, swap it for something shorter"></textarea>
+      <div class="msg-actions">
+        <button data-act="copy">📋 Copy for Claude</button>
+        <button data-act="clearmsg">Clear</button>
+        Backup option. Claude can also read your progress through sync.
+      </div>
+    </div>
+    <div class="backup">
+      Backup file:
+      <button id="exportBtn">Download</button>
+      <button id="importBtn">Restore</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+  </section>
+</main>
+
+<nav class="bottomnav" id="bottomNav" aria-label="Sections"></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ===================== PLAN DATA (edit here) =====================
+// pages: total pages (for audiobooks use the number of chapters or leave 0 to track by percent only).
+// format: "paper" | "ebook" | "audio". Cover images go in covers/b-<id>.jpg (a title card shows if missing).
+// NEVER rename a book id: progress is keyed by id.
+const BOOKS = {
+  // example: { title: "Dune", author: "Frank Herbert", pages: 612, format: "paper" },
+};
+
+// Active books = the first unfinished book of each slot's queue.
+const SLOTS = [
+  { id: "main",  name: "Main book",  moment: "evenings",       color: "var(--s1)", queue: [], after: "" },
+  { id: "light", name: "Light read", moment: "bed / commute",  color: "var(--s3)", queue: [], after: "" },
+];
+
+// Books you want to read at some point (ids from BOOKS). They are not in any slot yet.
+const SOMEDAY = [];
+
+// =================================================================
+const KEY = "readingTracker.v1";
+let state = load();
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || { books: {}, inbox: "" }; }
+  catch { return { books: {}, inbox: "" }; }
+}
+function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+
+function book(id) {
+  const b = BOOKS[id];
+  const s = state.books[id] || (state.books[id] = { page: 0, note: "", rating: "", finishedAt: "", droppedAt: "" });
+  return { id, ...b, ...s };
+}
+const isOver = b => b.finishedAt || b.droppedAt;
+const pctOf = b => b.pages ? Math.min(100, Math.round(100 * b.page / b.pages)) : (b.finishedAt ? 100 : b.page || 0);
+const activeIn = slot => slot.queue.filter(id => BOOKS[id]).map(book).find(b => !isOver(b));
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const RATINGS = [["liked", "👍 Liked"], ["disliked", "👎 Didn't like"], ["hated", "💀 Hated"]];
+const FORMAT = { paper: "📖 Paper", ebook: "📱 E-book", audio: "🎧 Audiobook" };
+const today = () => new Date().toISOString().slice(0, 10);
+
+const VIEWS = [["home", "🏠", "Reading"], ["queue", "📋", "Queue"], ["shelf", "🏆", "Shelf"], ["message", "💬", "Claude"]];
+function buildNav() {
+  const mk = (tag, cls) => VIEWS.map(([v, i, l]) => `<${tag} data-nav="${v}"${cls}><span>${i}</span>${l}</${tag}>`).join("");
+  document.getElementById("bottomNav").innerHTML = mk("button", "") + `<a href="tracker.html"><span>🎮</span>Games</a>`;
+  document.getElementById("deskNav").innerHTML = VIEWS.map(([v, i, l]) => `<button data-nav="${v}">${i} ${l}</button>`).join("");
+}
+
+function render() {
+  renderStats(); renderSlots(); renderQueue(); renderShelf();
+  document.getElementById("inbox").value = state.inbox || "";
+}
+
+function renderStats() {
+  const all = Object.keys(BOOKS).map(book);
+  const done = all.filter(b => b.finishedAt).length;
+  const reading = SLOTS.filter(activeIn).length;
+  const queued = SLOTS.reduce((n, s) => n + s.queue.filter(id => BOOKS[id] && !isOver(book(id))).length, 0) - reading;
+  document.getElementById("stats").innerHTML =
+    [["Reading now", reading], ["Up next", Math.max(0, queued)], ["Finished", done]]
+      .map(([l, v]) => `<div class="tile"><div class="label">${l}</div><div class="value">${v}</div></div>`).join("");
+}
+
+function cover(b) {
+  return `<div class="ph">${esc(b.title)}</div><img src="covers/b-${b.id}.jpg" alt="" loading="lazy" style="position:absolute;z-index:2" onerror="this.remove()">`;
+}
+
+function renderSlots() {
+  const el = document.getElementById("slots");
+  const cards = SLOTS.map(slot => {
+    const b = activeIn(slot);
+    if (!b) return `<div class="card" style="--c:${slot.color}"><div class="body"><div class="badge" style="position:static;align-self:flex-start;background:var(--surface-2);color:var(--text-primary)"><span class="dot"></span>${esc(slot.name)}</div>
+      <div class="empty">Nothing here yet.${slot.after ? " Next: " + esc(slot.after) : " Tell Claude what to read next."}</div></div></div>`;
+    const p = pctOf(b);
+    return `<div class="card" style="--c:${slot.color}">
+      <div class="hero"><div class="badge"><span class="dot"></span>${esc(slot.name)} · ${esc(slot.moment)}</div>
+        <div style="position:relative;display:flex;align-items:center;justify-content:center">${cover(b)}</div></div>
+      <div class="body">
+        <div><div class="book-title">${esc(b.title)}</div><div class="author">${esc(b.author || "")}</div></div>
+        <div class="chips">${b.format ? `<span class="chip">${FORMAT[b.format] || esc(b.format)}</span>` : ""}${b.pages ? `<span class="chip">${b.pages} pages</span>` : ""}</div>
+        <div><div class="bar"><i style="width:${p}%"></i></div><div class="pct"><span>${p}%</span><span>${b.pages ? `${b.page} / ${b.pages}` : ""}</span></div></div>
+        <div class="pages">
+          <button data-act="step" data-g="${b.id}" data-n="-10" aria-label="Back 10 pages">−10</button>
+          <input type="number" min="0" ${b.pages ? `max="${b.pages}"` : 'max="100"'} value="${b.page}" data-act="setpage" data-g="${b.id}" aria-label="${b.pages ? "Current page" : "Percent read"}">
+          <button data-act="step" data-g="${b.id}" data-n="10" aria-label="Forward 10 pages">+10</button>
+          <button data-act="step" data-g="${b.id}" data-n="25">+25</button>
+        </div>
+        <div><label class="field-label" for="note-${b.id}">Where I left off</label>
+          <textarea id="note-${b.id}" data-act="note" data-g="${b.id}" placeholder="Chapter, a thought, who is who…">${esc(b.note)}</textarea></div>
+        <div class="actions">
+          <button class="finish" data-act="finish" data-g="${b.id}">✅ Finished</button>
+          <button data-act="drop" data-g="${b.id}">Drop</button>
+        </div>
+      </div></div>`;
+  });
+  el.innerHTML = cards.join("");
+}
+
+const mini = id => `<img class="mini" src="covers/b-${id}.jpg" alt="" onerror="this.style.visibility='hidden'">`;
+
+function renderQueue() {
+  const activeIds = new Set(SLOTS.map(activeIn).filter(Boolean).map(b => b.id));
+  const rows = [];
+  SLOTS.forEach(slot => slot.queue.filter(id => BOOKS[id]).map(book).filter(b => !isOver(b) && !activeIds.has(b.id)).forEach((b, i) =>
+    rows.push(`<div class="row" style="--c:${slot.color}">${mini(b.id)}<div class="info"><b>${esc(b.title)}</b><span class="muted">${esc(b.author || "")} · ${esc(slot.name)}</span></div><span class="num">${i + 1}</span></div>`)));
+  document.getElementById("queue").innerHTML = rows.join("") || `<div class="empty">Queue is empty.</div>`;
+  const some = SOMEDAY.filter(id => BOOKS[id]).map(book).filter(b => !isOver(b));
+  document.getElementById("someday").innerHTML = some.map(b =>
+    `<div class="row">${mini(b.id)}<div class="info"><b>${esc(b.title)}</b><span class="muted">${esc(b.author || "")}</span></div></div>`).join("") || `<div class="empty">Nothing parked.</div>`;
+}
+
+function renderShelf() {
+  const over = Object.keys(BOOKS).map(book).filter(isOver).sort((a, b) => (b.finishedAt || b.droppedAt).localeCompare(a.finishedAt || a.droppedAt));
+  document.getElementById("shelf").innerHTML = over.map(b => `<div class="row">${mini(b.id)}
+    <div class="info"><b>${esc(b.title)}</b><span class="muted">${esc(b.author || "")} · ${b.finishedAt ? "Finished " + b.finishedAt : "Dropped " + b.droppedAt}</span>
+      <div class="rate" style="margin-top:6px">${RATINGS.map(([k, l]) => `<button class="${b.rating === k ? "on" : ""}" data-act="rate" data-g="${b.id}" data-r="${k}">${l}</button>`).join("")}</div></div>
+    <button data-act="reopen" data-g="${b.id}">Reopen</button></div>`).join("") || `<div class="empty">Finished and dropped books show up here.</div>`;
+}
+
+function showView(name) {
+  if (!VIEWS.some(v => v[0] === name)) name = "home";
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.dataset.view === name));
+  document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("on", b.dataset.nav === name));
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", () => showView(location.hash.slice(1)));
+
+function patch(id, fields) { book(id); Object.assign(state.books[id], fields); save(); }
+
+document.addEventListener("click", e => {
+  const nav = e.target.closest("[data-nav]");
+  if (nav) { location.hash = nav.dataset.nav; return; }
+  const el = e.target.closest("[data-act]");
+  if (!el) return;
+  const { act, g: id } = el.dataset;
+  if (act === "step") {
+    const b = book(id), max = b.pages || 100;
+    patch(id, { page: Math.max(0, Math.min(max, b.page + +el.dataset.n)) }); render();
+  }
+  if (act === "finish") {
+    const b = book(id);
+    patch(id, { finishedAt: today(), page: b.pages || 100 }); render();
+    toast(`Finished “${b.title}”! Rate it on the Shelf.`, () => { patch(id, { finishedAt: "", page: b.page }); render(); });
+  }
+  if (act === "drop") {
+    const b = book(id);
+    patch(id, { droppedAt: today() }); render();
+    toast(`Dropped “${b.title}”.`, () => { patch(id, { droppedAt: "" }); render(); });
+  }
+  if (act === "reopen") { patch(id, { finishedAt: "", droppedAt: "" }); render(); }
+  if (act === "rate") { const b = book(id); patch(id, { rating: b.rating === el.dataset.r ? "" : el.dataset.r }); render(); }
+  if (act === "clearmsg") { state.inbox = ""; save(); render(); }
+  if (act === "copy") copyForClaude();
+});
+
+document.addEventListener("change", e => {
+  const el = e.target.closest("[data-act='setpage']");
+  if (!el) return;
+  const b = book(el.dataset.g), max = b.pages || 100;
+  patch(b.id, { page: Math.max(0, Math.min(max, Math.round(+el.value) || 0)) }); render();
+});
+document.addEventListener("input", e => {
+  if (e.target.id === "inbox") { state.inbox = e.target.value; save(); }
+  const el = e.target.closest("[data-act='note']");
+  if (el) patch(el.dataset.g, { note: el.value });
+});
+
+function copyForClaude() {
+  const lines = ["[Reading tracker update]"];
+  if (state.inbox.trim()) lines.push("Requests:", ...state.inbox.trim().split("\n").map(l => "- " + l));
+  lines.push("Reading now:");
+  SLOTS.forEach(s => { const b = activeIn(s); if (b) lines.push(`- ${b.title} (${s.name}): ${pctOf(b)}%${b.note ? ` — left off: ${b.note}` : ""}`); });
+  const shelf = Object.keys(BOOKS).map(book).filter(isOver);
+  if (shelf.length) lines.push("Shelf:", ...shelf.map(b => `- ${b.title}: ${b.finishedAt ? "finished " + b.finishedAt : "dropped " + b.droppedAt}${b.rating ? ", " + b.rating : ""}`));
+  const text = lines.join("\n");
+  (navigator.clipboard?.writeText(text) || Promise.reject()).then(() => toast("Copied. Paste it to Claude."), () => {
+    const t = document.createElement("textarea"); t.value = text; document.body.appendChild(t); t.select();
+    document.execCommand("copy"); t.remove(); toast("Copied. Paste it to Claude.");
+  });
+}
+
+let toastTimer;
+function toast(msg, undo) {
+  const t = document.getElementById("toast");
+  t.innerHTML = esc(msg) + (undo ? ` <button id="undoBtn" style="min-height:32px;padding:2px 10px;margin-left:8px">Undo</button>` : "");
+  t.classList.add("on");
+  if (undo) document.getElementById("undoBtn").onclick = () => { undo(); t.classList.remove("on"); };
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("on"), undo ? 6000 : 2500);
+}
+
+document.getElementById("exportBtn").onclick = () => {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: "application/json" }));
+  a.download = `reading-backup-${today()}.json`; a.click();
+};
+document.getElementById("importBtn").onclick = () => document.getElementById("importFile").click();
+document.getElementById("importFile").onchange = async e => {
+  try { state = JSON.parse(await e.target.files[0].text()); save(); render(); toast("Restored."); }
+  catch { toast("That file didn't work."); }
+};
+
+buildNav(); render(); showView(location.hash.slice(1));
+</script>
+</body>
+</html>

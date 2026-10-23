@@ -5,7 +5,7 @@
   Conflicts: last save wins (fine for one person switching devices).
 */
 (function () {
-  const PREFIXES = ["gamingTracker.", "rdr2Companion.", "companion."]; // what gets synced
+  const PREFIXES = ["gamingTracker.", "rdr2Companion.", "companion.", "readingTracker."]; // what gets synced
   const K = { token: "gpSync.token", gist: "gpSync.gist", updated: "gpSync.updated", synced: "gpSync.syncedAt" };
   const FILE = "gaming-plan-sync.json";
   const API = "https://api.github.com";
