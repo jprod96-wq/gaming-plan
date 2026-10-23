@@ -40,7 +40,7 @@
   }
   button:hover { background: var(--hairline); }
   button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
-  .topbar { max-width: 1100px; margin: 0 auto; padding: 28px 24px 8px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+  .topbar { max-width: 1100px; margin: 0 auto; padding: 28px 130px 8px 24px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
   .brand { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
   .tagline { color: var(--text-secondary); margin-top: 2px; }
   .muted { color: var(--text-muted); }
@@ -52,7 +52,7 @@
 
   .slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
-  .hero { position: relative; height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  .hero { position: relative; height: 216px; padding-top: 44px; overflow: hidden; display: flex; align-items: center; justify-content: center;
           background: linear-gradient(160deg, color-mix(in srgb, var(--c) 45%, var(--surface)), var(--surface)); }
   .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, var(--surface)); }
   .hero img { position: relative; z-index: 1; height: 160px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 8px; box-shadow: 0 12px 32px rgba(0,0,0,.55); }
@@ -103,6 +103,7 @@
   @media (max-width: 720px) {
     .wrap { padding: 0 14px calc(var(--nav-h) + env(safe-area-inset-bottom) + 32px); }
     .topbar { padding: 20px 14px 4px; }
+    .topbar .btn { display: none; }
     .brand { font-size: 22px; }
     .tagline { display: none; }
     .slots { grid-template-columns: minmax(0, 1fr); }
@@ -186,10 +187,11 @@
 // pages: total pages (for audiobooks use the number of chapters or leave 0 to track by percent only).
 // format: "paper" | "ebook" | "audio". Cover images go in covers/b-<id>.jpg (a title card shows if missing).
 // NEVER rename a book id: progress is keyed by id.
+// start: page you were on when the book was added (used only until you save your own progress).
 // pages: 0 = length unknown, tracked by percent instead. Page counts are typical editions (approximate).
 const BOOKS = {
   continuity:   { title: "Marvel Continuity Guide", author: "continuityguide.net", pages: 0, format: "ebook" },
-  spiral:       { title: "Spiral (The Ring #2)", author: "Koji Suzuki", pages: 304, format: "paper" },
+  spiral:       { title: "Spiral (The Ring #2)", author: "Koji Suzuki", pages: 304, start: 76, format: "paper" },
   dcc2:         { title: "Dungeon Crawler Carl #2: Carl's Doomsday Scenario", author: "Matt Dinniman", pages: 448, format: "paper" },
   ozzy:         { title: "Last Rites", author: "Ozzy Osbourne", pages: 0, format: "paper" },
   betty:        { title: "Betty", author: "Tiffany McDaniel", pages: 480, format: "paper" },
@@ -202,12 +204,11 @@ const BOOKS = {
   chapterhouse: { title: "Chapterhouse: Dune", author: "Frank Herbert", pages: 464, format: "paper" },
   discworld:    { title: "Discworld: the complete collection (from book 2)", author: "Terry Pratchett", pages: 0, format: "paper" },
   sober:        { title: "Sober Living for the Revolution", author: "Gabriel Kuhn", pages: 400, format: "paper" },
-  diemylove:    { title: "Die, My Love", author: "Ariana Harwicz", pages: 144, format: "paper" },
   smallthings:  { title: "The God of Small Things", author: "Arundhati Roy", pages: 340, format: "paper" },
   mill1:        { title: "Millennium #1: The Girl with the Dragon Tattoo", author: "Stieg Larsson", pages: 465, format: "paper" },
   mill2:        { title: "Millennium #2: The Girl Who Played with Fire", author: "Stieg Larsson", pages: 503, format: "paper" },
   mill3:        { title: "Millennium #3: The Girl Who Kicked the Hornets' Nest", author: "Stieg Larsson", pages: 563, format: "paper" },
-  passion:      { title: "The Passion trilogy", author: "", pages: 0, format: "paper" },
+  passion:      { title: "The Passion Trilogy (Die, My Love · Feebleminded · Precocious)", author: "Ariana Harwicz", pages: 0, format: "paper" },
   achilles:     { title: "The Song of Achilles", author: "Madeline Miller", pages: 352, format: "paper" },
   circe:        { title: "Circe", author: "Madeline Miller", pages: 400, format: "paper" },
 };
@@ -217,13 +218,13 @@ const SLOTS = [
   { id: "main",  name: "Main book",  moment: "evenings",       color: "var(--s1)", after: "",
     queue: ["spiral", "threebody", "sober", "smallthings", "mill1", "mill2", "mill3", "godemperor", "heretics", "chapterhouse"] },
   { id: "light", name: "Light read", moment: "bed / commute",  color: "var(--s3)", after: "",
-    queue: ["dcc2", "phm", "hhgttg", "ivan", "diemylove", "betty", "achilles", "circe", "ozzy"] },
+    queue: ["dcc2", "phm", "hhgttg", "ivan", "passion", "betty", "achilles", "circe", "ozzy"] },
   { id: "guide", name: "Guide",      moment: "any time, online", color: "var(--s4)", after: "",
     queue: ["continuity"] },
 ];
 
 // Books you want to read at some point (ids from BOOKS). They are not in any slot yet.
-const SOMEDAY = ["discworld", "passion"];
+const SOMEDAY = ["discworld"];
 
 // =================================================================
 const KEY = "readingTracker.v1";
@@ -237,7 +238,7 @@ function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
 
 function book(id) {
   const b = BOOKS[id];
-  const s = state.books[id] || (state.books[id] = { page: 0, note: "", rating: "", finishedAt: "", droppedAt: "" });
+  const s = state.books[id] || (state.books[id] = { page: b.start || 0, note: "", rating: "", finishedAt: "", droppedAt: "" });
   return { id, ...b, ...s };
 }
 const isOver = b => b.finishedAt || b.droppedAt;
@@ -256,8 +257,15 @@ function buildNav() {
 }
 
 function render() {
-  renderStats(); renderSlots(); renderQueue(); renderShelf();
+  renderStats(); renderSlots(); renderQueue(); renderShelf(); saveSummary();
   document.getElementById("inbox").value = state.inbox || "";
+}
+
+// Small summary of the active books, read by the 📚 banner on the games page (synced like the rest).
+function saveSummary() {
+  const sum = JSON.stringify(SLOTS.map(s => ({ s, b: activeIn(s) })).filter(x => x.b)
+    .map(x => ({ title: x.b.title, pct: pctOf(x.b), slot: x.s.name, color: x.s.color })));
+  if (localStorage.getItem("readingTracker.summary") !== sum) localStorage.setItem("readingTracker.summary", sum);
 }
 
 function renderStats() {
@@ -282,11 +290,11 @@ function renderSlots() {
       <div class="empty">Nothing here yet.${slot.after ? " Next: " + esc(slot.after) : " Tell Claude what to read next."}</div></div></div>`;
     const p = pctOf(b);
     return `<div class="card" style="--c:${slot.color}">
-      <div class="hero"><div class="badge"><span class="dot"></span>${esc(slot.name)} · ${esc(slot.moment)}</div>
+      <div class="hero"><div class="badge"><span class="dot"></span>${esc(slot.name)}</div>
         <div style="position:relative;display:flex;align-items:center;justify-content:center">${cover(b)}</div></div>
       <div class="body">
         <div><div class="book-title">${esc(b.title)}</div><div class="author">${esc(b.author || "")}</div></div>
-        <div class="chips">${b.format ? `<span class="chip">${FORMAT[b.format] || esc(b.format)}</span>` : ""}${b.pages ? `<span class="chip">${b.pages} pages</span>` : ""}</div>
+        <div class="chips"><span class="chip">${esc(slot.moment)}</span>${b.format ? `<span class="chip">${FORMAT[b.format] || esc(b.format)}</span>` : ""}${b.pages ? `<span class="chip">${b.pages} pages</span>` : ""}</div>
         <div><div class="bar"><i style="width:${p}%"></i></div><div class="pct"><span>${p}%</span><span>${b.pages ? `${b.page} / ${b.pages}` : ""}</span></div></div>
         <div class="pages">
           <button data-act="step" data-g="${b.id}" data-n="-10" aria-label="Back 10 pages">−10</button>
