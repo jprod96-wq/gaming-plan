@@ -186,18 +186,44 @@
 // pages: total pages (for audiobooks use the number of chapters or leave 0 to track by percent only).
 // format: "paper" | "ebook" | "audio". Cover images go in covers/b-<id>.jpg (a title card shows if missing).
 // NEVER rename a book id: progress is keyed by id.
+// pages: 0 = length unknown, tracked by percent instead. Page counts are typical editions (approximate).
 const BOOKS = {
-  // example: { title: "Dune", author: "Frank Herbert", pages: 612, format: "paper" },
+  continuity:   { title: "Marvel Continuity Guide", author: "continuityguide.net", pages: 0, format: "ebook" },
+  spiral:       { title: "Spiral (The Ring #2)", author: "Koji Suzuki", pages: 304, format: "paper" },
+  dcc2:         { title: "Dungeon Crawler Carl #2: Carl's Doomsday Scenario", author: "Matt Dinniman", pages: 448, format: "paper" },
+  ozzy:         { title: "Last Rites", author: "Ozzy Osbourne", pages: 0, format: "paper" },
+  betty:        { title: "Betty", author: "Tiffany McDaniel", pages: 480, format: "paper" },
+  threebody:    { title: "The Three-Body Problem", author: "Liu Cixin", pages: 400, format: "paper" },
+  ivan:         { title: "The Death of Ivan Ilyich", author: "Leo Tolstoy", pages: 86, format: "paper" },
+  phm:          { title: "Project Hail Mary", author: "Andy Weir", pages: 476, format: "paper" },
+  hhgttg:       { title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams", pages: 224, format: "paper" },
+  godemperor:   { title: "God Emperor of Dune", author: "Frank Herbert", pages: 450, format: "paper" },
+  heretics:     { title: "Heretics of Dune", author: "Frank Herbert", pages: 480, format: "paper" },
+  chapterhouse: { title: "Chapterhouse: Dune", author: "Frank Herbert", pages: 464, format: "paper" },
+  discworld:    { title: "Discworld: the complete collection (from book 2)", author: "Terry Pratchett", pages: 0, format: "paper" },
+  sober:        { title: "Sober Living for the Revolution", author: "Gabriel Kuhn", pages: 400, format: "paper" },
+  diemylove:    { title: "Die, My Love", author: "Ariana Harwicz", pages: 144, format: "paper" },
+  smallthings:  { title: "The God of Small Things", author: "Arundhati Roy", pages: 340, format: "paper" },
+  mill1:        { title: "Millennium #1: The Girl with the Dragon Tattoo", author: "Stieg Larsson", pages: 465, format: "paper" },
+  mill2:        { title: "Millennium #2: The Girl Who Played with Fire", author: "Stieg Larsson", pages: 503, format: "paper" },
+  mill3:        { title: "Millennium #3: The Girl Who Kicked the Hornets' Nest", author: "Stieg Larsson", pages: 563, format: "paper" },
+  passion:      { title: "The Passion trilogy", author: "", pages: 0, format: "paper" },
+  achilles:     { title: "The Song of Achilles", author: "Madeline Miller", pages: 352, format: "paper" },
+  circe:        { title: "Circe", author: "Madeline Miller", pages: 400, format: "paper" },
 };
 
 // Active books = the first unfinished book of each slot's queue.
 const SLOTS = [
-  { id: "main",  name: "Main book",  moment: "evenings",       color: "var(--s1)", queue: [], after: "" },
-  { id: "light", name: "Light read", moment: "bed / commute",  color: "var(--s3)", queue: [], after: "" },
+  { id: "main",  name: "Main book",  moment: "evenings",       color: "var(--s1)", after: "",
+    queue: ["spiral", "threebody", "sober", "smallthings", "mill1", "mill2", "mill3", "godemperor", "heretics", "chapterhouse"] },
+  { id: "light", name: "Light read", moment: "bed / commute",  color: "var(--s3)", after: "",
+    queue: ["dcc2", "phm", "hhgttg", "ivan", "diemylove", "betty", "achilles", "circe", "ozzy"] },
+  { id: "guide", name: "Guide",      moment: "any time, online", color: "var(--s4)", after: "",
+    queue: ["continuity"] },
 ];
 
 // Books you want to read at some point (ids from BOOKS). They are not in any slot yet.
-const SOMEDAY = [];
+const SOMEDAY = ["discworld", "passion"];
 
 // =================================================================
 const KEY = "readingTracker.v1";
