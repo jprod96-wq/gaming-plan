@@ -403,6 +403,9 @@ const GAMES = {
   hades: { title: "Hades", platform: "Switch 2", hours: 22, companion: "companion.html?game=hades", steps: [
     "Clear Tartarus", "Clear Asphodel", "Clear Elysium", "Reach the Temple of Styx",
     "First escape (beat Hades)", "Story ending / credits (~10 escapes)", "Epilogue"] },
+  sts: { title: "Slay the Spire", platform: "PS5", hours: 20, approx: true, steps: [
+    "Ironclad · first win", "Silent · first win", "Defect · first win", "Watcher · first win", "Beat the Heart (Act 4)"] },
+  mewgenics: { title: "Mewgenics", platform: "PC", hours: 30, approx: true, steps: numbered("Milestone", 6) },
 };
 
 // after: what to pick once the slot's queue is empty
@@ -413,8 +416,8 @@ const SLOTS = [
     after: "Pick ONE: Witcher 3, Elden Ring, Zelda BotW → TotK or Like a Dragon" },
   { id: "handheld", name: "Handheld story", color: "--s3", moment: "In bed, story mood",          queue: ["dr1", "dr2", "wonder", "gravity", "catherine"],
     after: "Mario Odyssey (Switch 2)" },
-  { id: "snack",    name: "Snack",          color: "--s4", moment: "20 minutes to spare",        queue: ["hades"],
-    after: "Pick from the PS5 snack pool: Isaac, Slay the Spire, Stardew Valley" },
+  { id: "snack",    name: "Snack",          color: "--s4", moment: "20 minutes to spare",        queue: ["sts", "hades", "mewgenics"],
+    after: "Pick from the PS5 snack pool: Isaac, Stardew Valley" },
 ];
 
 const RULES = [
@@ -429,7 +432,7 @@ const PARKED = [
   ["Short (under 15h)", ["Signalis", "Sonic X Shadow Generations", "Mario Odyssey · Switch 2", "Devil May Cry 5 Special Edition · PS5"]],
   ["Medium", ["Disco Elysium · PC", "The Last of Us Part II", "Final Fantasy XVI"]],
   ["Epic (40h+)", ["The Witcher 3", "Elden Ring", "Like a Dragon"]],
-  ["Snack pool · PS5", ["The Binding of Isaac", "Slay the Spire", "Stardew Valley"]],
+  ["Snack pool · PS5", ["The Binding of Isaac", "Stardew Valley"]],
   ["Paused", ["Bleach: Rebirth of Souls"]],
 ];
 
