@@ -75,3 +75,5 @@ Personal dashboard to finish games instead of growing the backlog.
 - 2026-10-23: Books got `genre` tags (1-2 each, shown as chips). add-book rating rules now use author AND genre (liked → suggest moving same-author/genre books up; didn't like → push later; hated → park author, only flag the genre; genres weighed over 2-3 ratings). Skill's SOMEDAY references replaced by PARKED.
 - 2026-10-26: One Piece Grand Gourmet (Switch) → Wishlist (no Wikipedia cover found); note: if bought, play it next.
 - 2026-10-29: Mewgenics (PC) → end of Snack queue (Soon, PC is a hassle). Slay the Spire now active in Snack (front), Hades paused behind it; removed from snack pool. Disco Elysium already in Parked Medium.
+- 2026-11-03: Finished Alan Wake (liked). Control now active in Main, Alan Wake 2 next (order unchanged). Companion for Control requested.
+- 2026-11-03: Control companion: 30 side missions, 18 mods/forms, 16 Altered Items/Bureau Alerts, 26 collectible milestones/categories, 14 tips (control.fandom.com). Surge form removed (cut content). Linked from the Control card.
